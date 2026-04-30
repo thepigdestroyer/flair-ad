@@ -1,0 +1,40 @@
+/* ============================================================
+   FLAIR-AD · scrollytelling.css
+   Scroll-triggered polish · GSAP primary · CSS fallback
+   No sticky graphics · no scroll-jacking
+   ============================================================ */
+
+/* Reveal-on-intersection — CSS fallback when JS / GSAP unavailable */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Counter elements — tabular nums prevent width jitter while animating */
+.counter {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+
+/* Full reset for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Stat bar numbers */
+.stat-num {
+  font-variant-numeric: tabular-nums;
+}

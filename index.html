@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A PhD on Alzheimer's disease at UK DRI Imperial. We're mapping where one broken protein switch turns the brain's gardener cells into disease-associated microglia — and finding the buttons that could turn them back." />
+  <title>FLAIR-AD · The broken switch that turns the brain's gardeners into disease-associated microglia</title>
+
+  <link rel="icon" href="data:,">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Libraries -->
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css?v=2" />
+  <link rel="stylesheet" href="css/components.css?v=22" />
+  <link rel="stylesheet" href="css/charts.css?v=22" />
+  <link rel="stylesheet" href="css/scrollytelling.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════════════ Navigation ══════════════════════════ -->
+<nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="nav-brand-name">FLAIR-AD</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="#evidence">Evidence</a>
+      <a class="nav-link" href="#aims">Aims</a>
+      <a class="nav-link" href="#lab">The lab</a>
+      <a class="nav-link" href="#forum">Forum</a>
+      <a class="nav-link nav-link--cta" href="data.html">Scientist view ↗</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+  <!-- ══════════════════════════════════ Hero ════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-halo" id="hero-halo" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="pill pill--ghost hero-pill">
+        <span class="dot" style="background:var(--c-accent)"></span>
+        PhD proposal · 2026–2030
+      </div>
+      <h1 class="hero-title">
+        In a healthy brain, your immune cells are <em class="hero-grad-soft">gardeners</em>.<br />
+        In Alzheimer's, a broken switch turns them into
+        <span class="hero-grad">DAM cells.</span>
+      </h1>
+      <p class="hero-lede">
+        We are looking for that switch &mdash; and the button that could turn it
+        off again. This site is the public-facing companion to a 4-year PhD at
+        the <strong>UK Dementia Research Institute at Imperial</strong>.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="#primer">
+          See how it works
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="4" y1="12" x2="20" y2="12" /><polyline points="14 6 20 12 14 18" />
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href="data.html">Scientist view</a>
+      </div>
+      <div class="hero-meta">
+        <span>10 min read · no jargon required</span>
+        <span class="hero-meta-sep" aria-hidden="true">·</span>
+        <span>Mapping IRF Family TF Binding in Microglial State Transitions</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Primer ══════════════════════════════ -->
+  <section class="section section--primer" id="primer" aria-labelledby="primer-hd">
+    <div class="section-head">
+      <span class="eyebrow">First &mdash; a quick primer</span>
+      <h2 id="primer-hd">Meet the gardener.</h2>
+      <p>
+        Your brain isn't only neurons. About <strong>one in every ten cells</strong>
+        is a <strong>microglia</strong> &mdash; a tiny immune cell that, in a
+        healthy brain, behaves like a gardener: pruning weak connections,
+        clearing waste, keeping the place tidy. There are roughly
+        <strong>8 billion of them</strong> patrolling your skull right now.
+      </p>
+      <p class="faint">
+        In Alzheimer's, something flips them out of "gardener" mode and into
+        the disease-associated state &mdash; aggressive, inflamed, and attacking the very
+        cells they should be protecting. <a class="link" href="#paradigm">See the switch &darr;</a>
+      </p>
+    </div>
+    <figure id="fig-microglia-primer" class="fig-block fig-block--xl"
+            aria-label="Schematic: brain anatomy zooming in on a microglia cell among neurons"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          We zoom from a whole brain into a single patch of tissue. Most of the
+          cells you can see are <strong>neurons</strong> &mdash; the long, spiky
+          cells that fire signals. The pink branching cell is a
+          <strong>microglia</strong>: a tiny immune cell that crawls between
+          neurons, prunes weak connections, and clears debris.
+        </p>
+        <p>
+          About <strong>1 in every 10</strong> brain cells is a microglia.
+          You have ~8 billion of them right now. In a healthy brain they're
+          gardeners; in Alzheimer's, they switch into disease-associated microglia (DAM)
+          &mdash; and that's the switch this PhD is mapping.
+        </p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ══════════════════════════════════ Stat bar ════════════════════════════ -->
+  <section class="stat-bar" aria-labelledby="stat-bar-hd">
+    <h2 id="stat-bar-hd" class="sr-only">Headline statistics</h2>
+    <div class="bleed stat-bar-inner">
+      <div class="stat stat--focal">
+        <div class="stat-num counter" data-target="900" data-suffix="K">900K</div>
+        <div class="stat-label">people in the UK<br /><span class="faint">living with dementia today</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num counter" data-target="80" data-suffix="+">80+</div>
+        <div class="stat-label">DNA risk regions<br /><span class="faint">Bellenguez 2022 · N=487,511</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num counter" data-target="96" data-suffix="%">96%</div>
+        <div class="stat-label">of those changes<br /><span class="faint">happen in microglia</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num counter" data-target="30" data-suffix="">30</div>
+        <div class="stat-label">years of failed plaque drugs<br /><span class="faint">&gt;99% trial failure rate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Evidence trio ═══════════════════════ -->
+  <section class="section" id="evidence">
+    <div class="section-head">
+      <span class="eyebrow">The evidence</span>
+      <h2>Three different methods. The same answer.</h2>
+      <p>
+        Three completely separate scientific tools have, independently, pointed
+        to the same suspect: microglia. None of them was looking for microglia
+        when they started.
+      </p>
+    </div>
+    <div class="bleed evidence-grid">
+      <a class="evidence-card" href="data.html#panel-gwas" aria-label="Open the genetics panel">
+        <div class="evidence-card-head">
+          <span class="eyebrow">1 · Genetics</span>
+          <span class="evidence-count"><span class="counter" data-target="80" data-suffix="+">80+</span> loci</span>
+        </div>
+        <div class="evidence-chart" id="mini-manhattan" data-chart="manhattan-mini"></div>
+        <h3>The DNA changes that raise your risk land near microglia genes.</h3>
+        <p>
+          Comparing the genomes of half a million people, scientists have found
+          80+ regions of DNA that change your odds of getting Alzheimer's. The
+          genes nearest those regions &mdash; <span class="mono gene">TREM2</span>,
+          <span class="mono gene">CD33</span>, <span class="mono gene">INPP5D</span>,
+          <span class="mono gene">MS4A6A</span>, <span class="mono gene">MEF2C</span>
+          &mdash; are almost all switched on in microglia, not neurons.
+        </p>
+        <span class="evidence-cta">Explore the genetics <span class="arrow">→</span></span>
+      </a>
+
+      <a class="evidence-card" href="data.html#panel-snrnaseq" aria-label="Open the single-cell panel">
+        <div class="evidence-card-head">
+          <span class="eyebrow">2 · Cell biology</span>
+          <span class="evidence-count">96% in microglia</span>
+        </div>
+        <div class="evidence-chart" id="mini-celltypes" data-chart="celltypes-mini"></div>
+        <h3>The genes that misbehave in Alzheimer's brains misbehave in microglia.</h3>
+        <p>
+          Modern lab tools can ask one cell at a time which genes are on or off.
+          When researchers re-analysed Alzheimer's brains carefully, only 26
+          genes truly behaved differently from healthy brains &mdash; and 25
+          of those 26 changes happened in microglia.
+        </p>
+        <span class="evidence-cta">Explore the cell data <span class="arrow">→</span></span>
+      </a>
+
+      <a class="evidence-card" href="data.html#panel-ewce" aria-label="Open the statistics panel">
+        <div class="evidence-card-head">
+          <span class="eyebrow">3 · Statistics</span>
+          <span class="evidence-count"><span class="mono">4.1σ</span></span>
+        </div>
+        <div class="evidence-chart" id="mini-ewce" data-chart="ewce-mini"></div>
+        <h3>Statistically, microglia top every Alzheimer's gene-list we test.</h3>
+        <p>
+          Our supervisor built a tool called <strong>EWCE</strong> that ranks
+          which brain cell types a disease is hitting. For Alzheimer's, the
+          microglia score is more than 4 standard deviations above any other
+          cell &mdash; the strongest, cleanest signal in the data.
+        </p>
+        <span class="evidence-cta">Explore the statistics <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <!-- Convergence synthesis diagram -->
+    <div class="convergence-frame">
+      <div class="convergence-head">
+        <span class="eyebrow">The synthesis</span>
+        <h3>Three roads. One destination.</h3>
+        <p class="faint">
+          Genetics asked "where does the risk live in DNA?". Cell biology asked
+          "which cells misbehave?". Statistics asked "which cells carry the
+          gene-list?". All three roads end at microglia.
+        </p>
+      </div>
+      <figure id="fig-convergence" class="fig-block fig-block--wide"
+              aria-label="Three converging arrows from genetics, cell biology and statistics to microglia"></figure>
+      <details class="fig-explainer">
+        <summary>What's happening here?</summary>
+        <div class="fig-explainer-body">
+          <p>
+            Three completely independent scientific approaches were each asked
+            a different question about Alzheimer's:
+          </p>
+          <p>
+            <strong>GWAS</strong> (genome-wide association studies) compared
+            the DNA of half a million people and found 80+ regions of risk
+            &mdash; the <strong>29 strongest</strong> all sit near genes that
+            are switched on in microglia.
+            <strong>snRNA-seq</strong> (single-nucleus RNA sequencing) looked
+            at one cell at a time and found that <strong>26 genes</strong>
+            misbehave in Alzheimer brains; 25 of those misbehave inside
+            microglia.
+            <strong>EWCE</strong> is a statistics tool that ranks which cell
+            type a disease is hitting; for Alzheimer's, microglia score
+            <strong>4.1 standard deviations</strong> higher than any other
+            brain cell.
+          </p>
+          <p>
+            Three different methods. Three different kinds of evidence. They
+            all converge on the same suspect.
+          </p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Causal chain ════════════════════════ -->
+  <section class="section" id="causal" aria-labelledby="causal-hd">
+    <div class="section-head">
+      <span class="eyebrow">From DNA letter to disease risk</span>
+      <h2 id="causal-hd">How does a single letter of DNA raise your risk?</h2>
+      <p>
+        Most Alzheimer's risk variants don't sit inside genes themselves. They
+        sit in nearby <strong>regulatory DNA</strong> &mdash; the dimmer
+        switches that decide how loudly each gene speaks. Tweak the dimmer,
+        and a microglia starts behaving differently. Repeat that across many
+        genes and the gardener slides into the disease-associated state.
+      </p>
+    </div>
+    <figure id="fig-causal-chain" class="fig-block fig-block--xl"
+            aria-label="Chain: SNP variant changes an enhancer, alters microglial gene expression, shifts cell state, contributes to Alzheimer's risk"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          This is the chain that turns a tiny inherited DNA difference into
+          measurable disease risk &mdash; five steps:
+        </p>
+        <p>
+          <strong>1.</strong> One letter of your three-billion-letter genome
+          is different from the average person. We call that a
+          <span class="mono">SNP</span>. Most SNPs sit in non-coding DNA, not
+          inside genes.
+          <strong>2.</strong> The SNP lands inside a regulatory
+          <strong>enhancer</strong> &mdash; a stretch of DNA that decides how
+          loudly a nearby gene speaks. Enhancers are like dimmer switches.
+          <strong>3.</strong> The dimmer is now slightly tweaked, so the gene
+          it controls is expressed at a higher (or lower) level.
+          <strong>4.</strong> Repeat for hundreds of dimmers across the
+          microglia's DNA. Together they nudge the cell out of its calm
+          gardener state and into the disease-associated (DAM) state.
+          <strong>5.</strong> Multiplied across millions of microglia, the
+          cumulative tilt is what we measure as <strong>inherited Alzheimer's
+          risk</strong>.
+        </p>
+        <p>
+          That's why mapping where IRF1 binds matters: it tells us
+          <em>which</em> dimmers are wired into the gardener-to-DAM flip.
+        </p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ══════════════════════════════════ Paradigm shift ══════════════════════ -->
+  <section class="section section--alt" id="paradigm">
+    <div class="section-head">
+      <span class="eyebrow">The paradigm shift</span>
+      <h2>From clearing plaques&hellip; to flipping switches.</h2>
+      <p>
+        For thirty years drug companies aimed at the rubbish microglia leave
+        behind &mdash; the amyloid plaques. Almost every trial failed. Genetics
+        had been quietly pointing somewhere else: at the cells that <em>make</em>
+        the rubbish in the first place.
+      </p>
+    </div>
+    <div class="bleed paradigm-grid">
+      <article class="paradigm-card paradigm-card--old">
+        <div class="paradigm-symbol" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <path d="M8,36 C16,26 24,42 32,32 C40,22 48,40 56,30" fill="none" stroke="#a0b3c7" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M8,48 C16,38 24,54 32,44 C40,34 48,52 56,42" fill="none" stroke="#a0b3c7" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+            <line x1="8" y1="8" x2="56" y2="56" stroke="#c2185b" stroke-width="3" stroke-linecap="round" />
+            <line x1="56" y1="8" x2="8" y2="56" stroke="#c2185b" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        </div>
+        <p class="paradigm-era">The amyloid era</p>
+        <h3>Sweep up the rubbish. The disease will follow.</h3>
+        <ul class="paradigm-list">
+          <li>Amyloid plaques assumed to <em>cause</em> the disease</li>
+          <li>30 years of plaque-clearing drug development</li>
+          <li>&gt;99% of trials failed in late-stage testing</li>
+          <li>Neurons were treated as the main characters</li>
+        </ul>
+      </article>
+
+      <div class="paradigm-arrow" aria-hidden="true">
+        <svg viewBox="0 0 120 40" width="120" height="40">
+          <line x1="8" y1="20" x2="104" y2="20" stroke="#c2185b" stroke-width="2" stroke-linecap="round" />
+          <polyline points="92,10 112,20 92,30" fill="none" stroke="#c2185b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="paradigm-arrow-label">shift</span>
+      </div>
+
+      <article class="paradigm-card paradigm-card--new">
+        <div class="paradigm-symbol" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <polygon
+              points="32,6 39,10 37,23 51,22 42,32 51,42 37,41 39,54 32,58 25,54 27,41 13,42 22,32 13,22 27,23 25,10"
+              fill="#c2185b" opacity="0.15" stroke="#c2185b" stroke-width="1.5"
+            />
+            <polygon
+              points="32,14 36,17 35,25 44,24 38,32 44,40 35,39 36,47 32,50 28,47 29,39 20,40 26,32 20,24 29,25 28,17"
+              fill="#c2185b" opacity="0.9"
+            />
+            <circle cx="32" cy="32" r="4" fill="#8e0f45" />
+          </svg>
+        </div>
+        <p class="paradigm-era">The microglia era</p>
+        <h3>The risk lives in the immune cells. Find the switch.</h3>
+        <ul class="paradigm-list">
+          <li>Genetic risk lives in <em>microglia</em> &mdash; not neurons</li>
+          <li>One protein, <span class="mono gene">IRF1</span>, flips them from gardener to disease-associated state</li>
+          <li><span class="mono gene">IRF1</span> sits <em>upstream</em> of <span class="mono gene">ApoE4</span> &mdash; the strongest known risk gene</li>
+          <li>The switches around it are druggable targets</li>
+        </ul>
+      </article>
+    </div>
+    <figure id="fig-microglia-state" class="fig-block fig-block--wide"
+            aria-label="Microglia cell-state transition: gardener (homeostatic) diverges to alarmed (LPS-activated) or disease-associated / DAM"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          The same microglia cell can sit in three very different
+          <strong>states</strong>, depending on what's around it:
+        </p>
+        <p>
+          <strong>Gardener (homeostatic).</strong> Long, fine branches
+          constantly probe the neighbourhood. <span class="mono">IRF1</span>
+          activity is <em>low</em>.
+        </p>
+        <p>
+          <strong>Alarmed (activated).</strong> Hit with a bacterial signal
+          (<span class="mono">LPS</span>), the branches retract and the cell
+          ramps up inflammatory signals. This is a <em>normal and necessary</em>
+          response &mdash; it's how microglia fight off infection or clear up after
+          injury. <span class="mono">IRF1</span> rises, but the cell can return to
+          the gardener state once the threat passes.
+        </p>
+        <p>
+          <strong>Disease-associated (DAM).</strong> In Alzheimer's, microglia
+          face a very different challenge: a sustained, overwhelming environment of
+          amyloid-β plaques and dying neurons. Prolonged exposure to this signal
+          doesn't just activate the cell &mdash; it <em>fundamentally reprograms</em>
+          it. The genome is rewired, the cell loses its ability to return to the
+          gardener state, and it shifts into a chronically aggressive mode that
+          damages rather than protects. <span class="mono">IRF1</span> is high and
+          stays high.
+        </p>
+        <p>
+          The PhD profiles where <span class="mono gene">IRF1</span> binds in
+          all three states. Which dimmers does it touch in the gardener? Which
+          new ones lock in during the disease-associated reprogramming? Comparing
+          the maps reveals the molecular wiring of that irreversible switch.
+        </p>
+      </div>
+    </details>
+
+    <!-- IRF1 master regulator hub -->
+    <div class="hub-frame">
+      <div class="hub-head">
+        <span class="eyebrow">The master switch</span>
+        <h3>One protein. Dozens of dimmers. Including the one that controls <span class="mono gene">ApoE4</span>.</h3>
+        <p class="faint">
+          IRF1 is a <em>transcription factor</em> &mdash; a protein whose job is
+          to land on DNA and turn whole groups of genes up or down at once. A
+          recent paper (ME-seq, 2026) showed it sits <em>upstream</em> of every
+          known feature of the disease-associated microglia, including
+          <span class="mono gene">ApoE4</span>, the single strongest genetic risk
+          factor for Alzheimer's. Map where IRF1 lands &mdash; and you map the
+          whole network.
+        </p>
+      </div>
+      <figure id="fig-irf1-hub" class="fig-block fig-block--xl"
+              aria-label="Hub-and-spoke: IRF1 in the centre, branching to many enhancers and the genes they control, several overlapping GWAS risk loci"></figure>
+      <details class="fig-explainer">
+        <summary>What's happening here?</summary>
+        <div class="fig-explainer-body">
+          <p>
+            <span class="mono gene">IRF1</span> is the hub at the centre.
+            Each spoke is an <strong>enhancer</strong> (the
+            <span class="mono">enh</span> badges) that
+            <span class="mono gene">IRF1</span> binds to, and each enhancer
+            in turn controls a single named gene at the rim.
+          </p>
+          <p>
+            The pink genes are ones where genetic studies have already
+            flagged Alzheimer's risk variants &mdash;
+            <span class="mono gene">ApoE4</span>,
+            <span class="mono gene">TREM2</span>,
+            <span class="mono gene">CD33</span>,
+            <span class="mono gene">PLCG2</span>,
+            <span class="mono gene">SPI1</span> &mdash; these are the strongest
+            inherited risk genes the field knows about.
+            <span class="mono gene">IRF1</span> appears to sit
+            <em>upstream</em> of all of them.
+          </p>
+          <p>
+            Map where <span class="mono gene">IRF1</span> lands across the
+            genome and you map the master regulator that points at every one
+            of these risk genes at once.
+          </p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Why it matters ══════════════════════ -->
+  <section class="section" id="why">
+    <div class="prose why-prose">
+      <span class="eyebrow">Why it still matters</span>
+      <h2>The bottleneck &mdash; and the trick to break it.</h2>
+      <p>
+        To find the buttons that calm an aggressive microglia back into a
+        gardener, we need to see <em>exactly where</em> IRF1 lands on DNA. That
+        map doesn't yet exist, because the usual way of finding it doesn't work.
+      </p>
+      <p>
+        Mapping where a protein touches DNA usually relies on an
+        <strong>antibody</strong> &mdash; a sticky molecular hook that grabs the
+        protein from a soup of cells. The catch: IRF1 isn't alone. It's one of
+        a 9-member family (IRF1&ndash;9) whose members share a near-identical
+        DNA-binding domain, and every off-the-shelf "anti-IRF1" antibody we've
+        tried grabs the whole family at once. The map you'd get is a blur of
+        every IRF, not a fingerprint of IRF1.
+      </p>
+      <p>
+        Our solution is a clever workaround called <strong>CETCh-seq</strong>:
+        instead of fishing for IRF1 directly, we add a tiny molecular barcode
+        to it &mdash; a <span class="gene mono">FLAG</span> tag. Then we use the
+        world's best off-the-shelf antibody for that barcode. To attach the
+        barcode without breaking the DNA, we use <strong>Prime Editing</strong>,
+        the most precise gene-editing tool yet built. The result is a sharp,
+        reliable IRF1 binding map &mdash; the first of its kind in human microglia.
+      </p>
+    </div>
+    <figure id="fig-chip-compare" class="fig-block fig-block--xl"
+            aria-label="Comparison: standard ChIP-seq blocked by missing antibody, versus CETCh-seq using a tagged protein and universal anti-tag antibody"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          Side by side &mdash; <strong>why standard ChIP-seq fails</strong> and
+          <strong>how CETCh-seq fixes it</strong>.
+        </p>
+        <p>
+          <strong>Left:</strong> The classic technique. You need a custom
+          antibody (the Y-shape) that grips the protein you care about. For
+          <span class="mono gene">IRF1</span>, every off-the-shelf antibody
+          binds the whole IRF family &mdash; IRF1, IRF2, IRF8 and the rest
+          share a near-identical DNA-binding domain, and the antibody can't
+          tell them apart. So your "IRF1 ChIP" is really a blur of every IRF.
+          <strong>Right:</strong> The trick. We use Prime Editing to glue a
+          tiny generic barcode (<span class="mono">FLAG</span>) onto IRF1
+          itself &mdash; and only IRF1. We then use the world's best
+          off-the-shelf <strong>anti-FLAG</strong> antibody, which only
+          recognises the barcode. The antibody is no longer asked to tell
+          siblings apart, so it doesn't have to.
+        </p>
+        <p>
+          The protein hasn't changed. Only how we grab hold of it has. That's
+          why CETCh-seq can work where ChIP-seq can't.
+        </p>
+      </div>
+    </details>
+    <figure id="fig-cetseq" class="fig-block fig-block--xl" aria-label="CETCh-seq experimental workflow"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          Five lab steps to go from "we can't see <span class="mono gene">IRF1</span>"
+          to a clean genome-wide binding map:
+        </p>
+        <p>
+          <strong>1. Design pegRNA.</strong> A short guide molecule
+          (<span class="mono">PRIDICT 2.0</span> picks the best one) that tells
+          Prime Editing exactly where to install the FLAG tag at the end of the
+          IRF1 gene.
+          <strong>2. Prime Edit.</strong> We zap the cells
+          (<span class="mono">PE3</span> electroporation in iPSC microglia)
+          with the editing machinery. The tag is now physically part of the
+          IRF1 gene.
+          <strong>3. Verify.</strong> Sanger sequencing and NGS confirm the
+          edit. Single edited cells are sorted by FACS into clones.
+          <strong>4. CETCh-seq.</strong> Same protocol as ChIP-seq, but using
+          anti-FLAG instead of anti-IRF1 &mdash; baseline and after
+          <span class="mono">LPS</span>/<span class="mono">IFN&gamma;</span>
+          stimulation.
+          <strong>5. Binding map.</strong> Overlay the IRF1 peaks with the 29
+          GWAS risk loci. Where they coincide is a candidate drug target.
+        </p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ══════════════════════════════════ TIP-seq + lab fit ═══════════════════ -->
+  <section class="section" id="tipseq" aria-labelledby="tipseq-hd">
+    <div class="section-head">
+      <span class="eyebrow">Why this lab can pull it off</span>
+      <h2 id="tipseq-hd">The Skene Lab already maps DNA-binding proteins for a living.</h2>
+      <p>
+        Reading where proteins land on DNA is what this group does every week
+        &mdash; using a method called <strong>TIP-seq</strong>. Before we get
+        to what this PhD adds, here's how TIP-seq actually works.
+      </p>
+    </div>
+
+    <!-- TIP-seq five-step workflow -->
+    <figure id="fig-tipseq-flow" class="fig-block fig-block--xl"
+            aria-label="TIP-seq workflow: antibody finds the protein, Tn5 cuts and tags DNA, T7 makes linear RNA copies, fragments are sequenced, peaks reveal the binding map"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          The full TIP-seq pipeline in five steps:
+        </p>
+        <p>
+          <strong>1. Find.</strong> An antibody locks onto its target protein
+          sitting on DNA &mdash; the protein could be any transcription factor
+          we want to map.
+          <strong>2. Cut &amp; tag.</strong> A molecular cutter
+          (<span class="mono">Tn5</span>) is fused to the antibody. It clips
+          the DNA on either side of the binding site and stamps each cut end
+          with a synthetic tag containing a <span class="mono">T7</span>
+          promoter sequence.
+          <strong>3. Amplify.</strong> Here's the secret sauce.
+          <span class="mono">T7</span> RNA polymerase reads the
+          <span class="mono">T7</span> promoter and produces a fixed number
+          of RNA copies of each tagged fragment &mdash; <em>linear</em>
+          amplification. PCR doubles every cycle (exponential), so a few
+          fragments end up wildly over-represented; T7 doesn't, so peak
+          heights stay quantitative.
+          <strong>4. Sequence.</strong> Convert the RNA copies back to DNA,
+          load them onto a sequencer, read both ends of every fragment.
+          <strong>5. Map.</strong> Pile the reads back onto the genome.
+          Wherever many reads stack up &mdash; a peak &mdash; is somewhere the
+          protein was bound. Do this for every chromosome and you have a
+          genome-wide binding map.
+        </p>
+      </div>
+    </details>
+
+    <div class="prose tipseq-prose">
+      <p>
+        Think of <strong>TIP-seq</strong> as a microscopic stamp. An
+        <em>antibody</em> &mdash; a Y-shaped protein that recognises one
+        specific target &mdash; is fused to a tiny molecular cutter called
+        <span class="mono">Tn5</span>. When the antibody finds its protein
+        sitting on DNA, the cutter clips and labels the DNA on either side
+        of that exact spot. The bookmark <span class="mono">Tn5</span> drops
+        in includes a <strong><span class="mono">T7</span> promoter</strong>
+        &mdash; a short DNA sequence that the next step needs.
+      </p>
+      <p class="tipseq-secret">
+        <span class="tipseq-secret-tag">The secret sauce</span>
+        <strong>Linear amplification with T7 RNA polymerase.</strong>
+        Older protocols copy the labelled fragments by <em>PCR</em> &mdash;
+        which doubles the count every cycle, so a few lucky molecules end up
+        massively over-represented and the proportions become noise. TIP-seq
+        skips PCR. Instead, <span class="mono">T7</span> RNA polymerase
+        latches onto every <span class="mono">T7</span> promoter and makes a
+        <strong>fixed number of RNA copies of each tagged fragment</strong>
+        &mdash; about a hundred. A fragment present once in the cell becomes
+        ~100 copies; a fragment present ten times becomes ~1,000. The
+        scaling is <em>linear</em>, so the peak heights you measure at the
+        end actually reflect how many times the protein was bound. PCR-based
+        methods can't promise that. This is why TIP-seq works on tiny cell
+        numbers, runs cleaner than ChIP-seq, and is what the Skene Lab uses
+        every week.
+      </p>
+      <p class="faint">
+        The catch: TIP-seq still relies on a specific antibody to find the
+        target in the first place. For well-studied proteins (CTCF, RNA Pol II,
+        histone marks) that's fine. For proteins like
+        <span class="mono gene">IRF1</span> &mdash; whose antibodies bind
+        every member of the IRF family at once &mdash; TIP-seq inherits the
+        same specificity problem. That's the gap this PhD fills.
+      </p>
+    </div>
+
+    <!-- Side-by-side: TIP-seq vs CETCh-seq + Prime Editing -->
+    <figure id="fig-tipseq" class="fig-block fig-block--xl"
+            aria-label="Side-by-side: TIP-seq uses an antibody-tethered Tn5 cutter to mark binding sites; CETCh-seq adds a FLAG tag so the antibody is irrelevant"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          Same goal &mdash; "where on the genome did this protein land?" &mdash;
+          but two different ways of grabbing the protein:
+        </p>
+        <p>
+          <strong>Left (TIP-seq, lab's existing pipeline):</strong> the
+          antibody recognises the protein <em>directly</em>. Works for ~80% of
+          proteins where a paralog-specific antibody exists.
+          <strong>Right (this PhD's CETCh-seq + Prime Editing):</strong>
+          the antibody recognises a <span class="mono">FLAG</span> barcode
+          that we install onto the protein with Prime Editing. Because we tag
+          only IRF1, an off-the-shelf anti-FLAG antibody now pulls down IRF1
+          and nothing else. Works for the remaining 20% &mdash; proteins like
+          <span class="mono gene">IRF1</span> whose own antibodies can't tell
+          family members apart.
+        </p>
+        <p>
+          The two methods complement each other. The lab keeps using TIP-seq
+          where it's already excellent, and adds CETCh-seq for the proteins
+          TIP-seq can't reach.
+        </p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ══════════════════════════════════ Aims ════════════════════════════════ -->
+  <section class="section section--alt" id="aims">
+    <div class="section-head">
+      <span class="eyebrow">The proposal</span>
+      <h2>Four aims, four years, three cell systems.</h2>
+      <p>
+        We start with a well-behaved human cell line, prove the trick works,
+        carry it into mouse microglia, then into <em>human</em> microglia grown
+        from stem cells, and finally connect what we find back to the genetics
+        of real Alzheimer's patients.
+      </p>
+    </div>
+    <figure id="fig-aims-gantt" class="fig-block fig-block--xl"
+            aria-label="Gantt timeline: four aims spanning Q4 2026 to Q3 2030"></figure>
+    <details class="fig-explainer">
+      <summary>What's happening here?</summary>
+      <div class="fig-explainer-body">
+        <p>
+          The four-year PhD plotted on a timeline. Each bar is one
+          <strong>aim</strong> &mdash; one chunk of work with a clear
+          deliverable. The dashed line marked <em>today</em> shows where in
+          the plan we currently are.
+        </p>
+        <p>
+          The pink bar is the <strong>current</strong> aim; grey bars are
+          upstream work that follows. The aims overlap a little because once
+          a protocol works in one cell type we start porting it into the next
+          while finishing analyses on the first.
+        </p>
+        <p>
+          The order is deliberate: each aim de-risks the next. We
+          <strong>only</strong> attempt the difficult human iPSC-microglia
+          editing once we've shown the trick works in an easy cell line, and
+          we only attempt the disease-genetics overlay once we have real
+          binding maps to overlay.
+        </p>
+      </div>
+    </details>
+
+    <div class="bleed aims-grid">
+      <article class="aim-card">
+        <div class="aim-head">
+          <span class="pill pill--magenta">Aim 1 · Year 1</span>
+          <span class="aim-when mono">2026 Q4 — 2027 Q3</span>
+        </div>
+        <h3>Prove the trick works in a friendly cell line.</h3>
+        <p>
+          We use <strong>HCT116</strong> &mdash; a human cell line scientists
+          already understand inside-out &mdash; to nail down how to attach a
+          <span class="gene mono">FLAG</span> barcode to <span class="gene mono">IRF1</span>
+          and <span class="gene mono">IRF8</span> using Prime Editing. We
+          confirm the tagged protein still works, and that the barcode-antibody
+          can pull it from chromatin (CTCF as positive control).
+        </p>
+      </article>
+
+      <article class="aim-card">
+        <div class="aim-head">
+          <span class="pill pill--ghost">Aim 2 · Year 2</span>
+          <span class="aim-when mono">2027 Q4 — 2028 Q3</span>
+        </div>
+        <h3>Carry the recipe into microglia.</h3>
+        <p>
+          We adapt the protocol for two microglial systems: <strong>BV2 mouse
+          microglia</strong> (faster, an ethical step that reduces animal use)
+          and <strong>human iPSC-derived microglia</strong> (KOLF2.1) &mdash;
+          microglia grown from stem cells in a dish. Microglia are notoriously
+          hard to edit; this is where the technical novelty lives.
+        </p>
+      </article>
+
+      <article class="aim-card">
+        <div class="aim-head">
+          <span class="pill pill--ghost">Aim 3 · Years 2&ndash;3</span>
+          <span class="aim-when mono">2028 Q4 — 2029 Q3</span>
+        </div>
+        <h3>Map IRF binding in three microglial states.</h3>
+        <p>
+          Where does <span class="gene mono">IRF1</span> (and its cousin
+          <span class="gene mono">IRF8</span>) actually land on DNA when a
+          microglia is the gardener, when it's been alarmed (LPS), and when
+          it's been turned into the disease-associated state (apoptotic neurons + amyloid-β)?
+          This is the first ever map of those three landscapes side by side.
+        </p>
+      </article>
+
+      <article class="aim-card">
+        <div class="aim-head">
+          <span class="pill pill--ghost">Aim 4 · Years 3&ndash;4</span>
+          <span class="aim-when mono">2029 Q4 — 2030 Q3</span>
+        </div>
+        <h3>Connect the maps back to real human risk.</h3>
+        <p>
+          We overlay the IRF binding sites with Alzheimer's genetic data using
+          two statistical tools (<strong>SLDP</strong> regression and
+          <strong>SuSiE</strong> fine-mapping). Sites where IRF1 lands AND
+          where DNA changes raise disease risk are the prime drug-target
+          shortlist that comes out of this PhD.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Why this lab ════════════════════════ -->
+  <section class="section" id="lab" aria-labelledby="lab-hd">
+    <div class="section-head">
+      <span class="eyebrow">Why this lab, why now</span>
+      <h2 id="lab-hd">Five reasons this PhD belongs in the Skene Lab.</h2>
+      <p>
+        The same group whose work first put microglia at the centre of
+        Alzheimer's now has the tools, the people, and the infrastructure to
+        finish the job.
+      </p>
+    </div>
+    <div class="bleed lab-grid">
+      <article class="lab-card">
+        <span class="lab-num">01</span>
+        <h3>Built the tool that proved microglia matter.</h3>
+        <p>
+          Dr Skene's <strong>EWCE</strong> and <strong>MAGMA_Celltyping</strong>
+          are the methods the field uses to ask "which cell type carries this
+          disease's risk?". They are how we know, statistically, that
+          Alzheimer's lives in microglia. Cited 1,000+ times.
+        </p>
+      </article>
+
+      <article class="lab-card">
+        <span class="lab-num">02</span>
+        <h3>Built to follow up on findings like this.</h3>
+        <p>
+          When external work &mdash; like the recent <strong>ME-seq</strong>
+          paper (2026) flagging IRF1 upstream of the disease-associated state &mdash;
+          points at a candidate, this is the lab positioned to test where it
+          actually lands on DNA. Cell-type genetics, iPSC microglia, and
+          chromatin profiling all live under one roof here.
+        </p>
+      </article>
+
+      <article class="lab-card">
+        <span class="lab-num">03</span>
+        <h3>Already maps proteins on DNA every week.</h3>
+        <p>
+          The lab runs <strong>TIP-seq</strong> and the new
+          <strong>SNAP-Tn5</strong> chromatin-profiling pipelines on UKDRI
+          grants. Adding antibody-independent <strong>CETCh-seq</strong> for
+          the proteins TIP-seq can't read is the natural next step &mdash;
+          not a leap.
+        </p>
+      </article>
+
+      <article class="lab-card">
+        <span class="lab-num">04</span>
+        <h3>The right kit, in the right building.</h3>
+        <p>
+          UK DRI Imperial White City: a <strong>Lonza 4D-Nucleofector</strong>
+          (the only practical way to gene-edit microglia at scale), 24×
+          <strong>NVIDIA A100 GPUs</strong> for the genomics, BSL-2 stem-cell
+          suites, and an in-house bioinformatics core for code review.
+        </p>
+      </article>
+
+      <article class="lab-card">
+        <span class="lab-num">05</span>
+        <h3>A network of collaborators across three continents.</h3>
+        <p>
+          The project draws on partners at the <strong>Francis Crick
+          Institute</strong> (UK), the <strong>NIH Center for Alzheimer's
+          and Related Dementias</strong> (USA), the <strong>Wyss-Coray Lab
+          at Stanford</strong> (USA), and the <strong>Florey Institute</strong>
+          (Australia) &mdash; pulling in techniques, datasets, and reagents
+          the lab can't generate alone.
+        </p>
+      </article>
+
+      <article class="lab-card lab-card--cta">
+        <span class="lab-num">+</span>
+        <h3>Built with patients, not just for them.</h3>
+        <p>
+          The <strong>Microglial Project Advisory Group</strong> (people
+          living with or affected by dementia) reviews this PhD's direction
+          twice a year. This very website is part of that two-way channel
+          &mdash; come back, ask hard questions, push back.
+        </p>
+        <a class="link" href="#share">Share your thoughts &rarr;</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ About ═══════════════════════════════ -->
+  <section class="section section--alt" id="about">
+    <div class="section-head">
+      <span class="eyebrow">Who is running this</span>
+      <h2>The team behind FLAIR-AD.</h2>
+    </div>
+    <div class="bleed about-grid about-grid--team">
+      <article class="about-card">
+        <div class="about-id" aria-hidden="true">
+          <span class="about-id-mono mono">PhD candidate</span>
+          <span class="about-initials">MJ</span>
+        </div>
+        <h3>Mrinal Joshi</h3>
+        <p class="about-role">
+          Doctoral researcher · UK Dementia Research Institute at Imperial
+        </p>
+        <p>
+          Molecular biologist (MSc Imperial, BSc King's College London).
+          Already on the team as research assistant: built the iPSC-microglia
+          differentiation pipeline and the nucleofection setup that this
+          PhD is launched from.
+        </p>
+        <div class="about-meta">
+          <a class="link" href="mailto:mrinal.joshi@ukdri.ac.uk">mrinal.joshi@ukdri.ac.uk</a>
+        </div>
+      </article>
+
+      <article class="about-card">
+        <div class="about-id" aria-hidden="true">
+          <span class="about-id-mono mono">Supervisor / PI</span>
+          <span class="about-initials">NS</span>
+        </div>
+        <h3>Dr Nathan Skene</h3>
+        <p class="about-role">
+          Group leader · UKRI Future Leaders Fellow · UK DRI at Imperial
+        </p>
+        <p>
+          Computational neurogenomicist whose tools (EWCE, MAGMA_Celltyping,
+          MungeSumstats, Enformer Celltyping) underpin the cell-type
+          enrichment field. Eight PhDs supervised, four already graduated.
+        </p>
+        <div class="about-meta">
+          <a class="link" href="https://www.imperial.ac.uk/people/n.skene">imperial.ac.uk/people/n.skene</a>
+        </div>
+      </article>
+
+      <aside class="about-links">
+        <h4 class="label">Project context</h4>
+        <ul>
+          <li>
+            <span class="about-link-kind mono">host</span>
+            <a class="link" href="https://ukdri.ac.uk">
+              UK Dementia Research Institute at Imperial
+            </a>
+          </li>
+          <li>
+            <span class="about-link-kind mono">duration</span>
+            <span>
+              4 years &middot; 01 / 10 / 2026 &mdash; 30 / 09 / 2030
+            </span>
+          </li>
+          <li>
+            <span class="about-link-kind mono">PPI</span>
+            <a class="link" href="#share">
+              Microglial Project Advisory Group + this site
+            </a>
+          </li>
+          <li>
+            <span class="about-link-kind mono">data</span>
+            <a class="link" href="data.html">
+              Open methods &amp; data explorer &rarr;
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ Share + Forum ═══════════════════════ -->
+  <section class="section section--alt" id="share" aria-labelledby="share-hd">
+    <div class="section-head">
+      <span class="eyebrow">Your turn</span>
+      <h2 id="share-hd">Share your thoughts.</h2>
+      <p>
+        Which parts of the proposal feel strongest? Where would you push back?
+        Five short questions. Anonymous.
+      </p>
+    </div>
+    <div class="bleed">
+      <div class="share-form" id="share-form">
+        <p class="faint" style="font-family:var(--f-mono);font-size:var(--fs-1);text-align:center">
+          Survey form · loading…
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="forum" aria-labelledby="forum-hd">
+    <div class="section-head">
+      <span class="eyebrow">Community</span>
+      <h2 id="forum-hd">Leave a public comment.</h2>
+      <p>
+        If you want to reply publicly &mdash; reviewers, prospective collaborators
+        &mdash; the thread is here. Top-voted posts surface first.
+      </p>
+    </div>
+    <div class="bleed forum-wrap" id="forum-wrap">
+      <p class="faint" style="font-family:var(--f-mono);font-size:var(--fs-1);text-align:center">
+        Forum · loading…
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════════ Footer ══════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-brand" href="/">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="nav-brand-name">FLAIR-AD</span>
+      </a>
+      <p>
+        Functional Landscape Analysis of Inflammatory Regulation in Alzheimer's
+        Disease &mdash; a PhD proposal from the UK DRI at Imperial College London.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <ul>
+        <li><a href="#evidence">Evidence</a></li>
+        <li><a href="#aims">Aims</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="data.html">Data explorer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Engage</h4>
+      <ul>
+        <li><a href="#share">Share thoughts</a></li>
+        <li><a href="#forum">Forum</a></li>
+        <li><a href="mailto:mrinal.joshi@ukdri.ac.uk">Email</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Host</h4>
+      <ul>
+        <li>UK Dementia Research Institute</li>
+        <li>Imperial College London</li>
+        <li>Skene Lab &middot; White City</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-foot">
+    <span>&copy; 2026 Mrinal Joshi · FLAIR-AD</span>
+    <span>Data is open &middot; code is open &middot; <a href="data.html#panel-methods">Methods</a></span>
+  </div>
+</footer>
+
+<!-- Entry scripts -->
+<script src="js/main.js?v=22" defer></script>
+<script src="js/hero-halo.js?v=22" defer></script>
+<script src="js/counters.js?v=22" defer></script>
+<script src="js/charts/util.js?v=22" defer></script>
+<script src="js/charts/manhattan.js?v=22" defer></script>
+<script src="js/charts/cell-types.js?v=22" defer></script>
+<script src="js/charts/ewce.js?v=22" defer></script>
+<script src="js/figures/microglia-primer.js?v=22" defer></script>
+<script src="js/figures/convergence.js?v=22" defer></script>
+<script src="js/figures/causal-chain.js?v=22" defer></script>
+<script src="js/figures/microglia-state.js?v=25" defer></script>
+<script src="js/figures/irf1-hub.js?v=23" defer></script>
+<script src="js/figures/chip-compare.js?v=23" defer></script>
+<script src="js/figures/cetseq-flow.js?v=23" defer></script>
+<script src="js/figures/tipseq-flow.js?v=23" defer></script>
+<script src="js/figures/tipseq.js?v=23" defer></script>
+<script src="js/figures/aims-gantt.js?v=22" defer></script>
+<script src="js/figures/aims-icons.js?v=26" defer></script>
+<script src="js/scrollytelling.js?v=22" defer></script>
+<script src="js/community.js?v=22" defer></script>
+
+</body>
+</html>

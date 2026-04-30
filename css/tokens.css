@@ -1,0 +1,98 @@
+/* ============================================================
+   FLAIR-AD · Biotech Modern · Design Tokens
+   Navy + Neuro-Magenta · 2026-04-23
+   ============================================================ */
+
+:root {
+  /* ---- Colour ---- */
+  --c-paper:         #ffffff;
+  --c-paper-2:       #f6f8fb;
+  --c-paper-3:       #eef2f7;
+  --c-paper-4:       #e1e7ef;
+
+  --c-ink:           #0a2540;
+  --c-ink-2:         #425466;
+  --c-ink-3:         #6a7a8c;
+  --c-ink-4:         #9aa7b5;
+
+  --c-rule:          rgba(10, 37, 64, 0.08);
+  --c-rule-strong:   rgba(10, 37, 64, 0.18);
+
+  --c-accent:        #c2185b;
+  --c-accent-2:      #e91e63;
+  --c-accent-3:      #ff5a8a;
+  --c-accent-deep:   #8e0f45;
+  --c-accent-wash:   rgba(194, 24, 91, 0.08);
+  --c-accent-wash-2: rgba(194, 24, 91, 0.16);
+
+  /* Chart semantic roles */
+  --c-chart-focal:     var(--c-accent);
+  --c-chart-context:   #a0b3c7;
+  --c-chart-faint:     #cad5e1;
+  --c-chart-up:        var(--c-accent);
+  --c-chart-down:      #3a6f7f;
+  --c-chart-microglia: var(--c-accent);
+  --c-chart-neuron:    #9c7a3f;
+  --c-chart-astro:     #3a6f7f;
+  --c-chart-oligo:     #7a6b8e;
+  --c-chart-opc:       #a85c6e;
+
+  /* ---- Typography ---- */
+  --f-display: 'Inter Tight', 'Inter', system-ui, -apple-system, sans-serif;
+  --f-sans:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --fs-0:      0.72rem;     /* eyebrow, micro-meta */
+  --fs-1:      0.78rem;     /* captions, small pill */
+  --fs-2:      0.85rem;     /* secondary body, table cells */
+  --fs-3:      0.95rem;     /* UI labels */
+  --fs-4:      1rem;        /* body */
+  --fs-5:      1.125rem;    /* lede */
+  --fs-6:      1.25rem;     /* h3 */
+  --fs-7:      1.5rem;      /* h2 small */
+  --fs-h2:     clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  --fs-h1:     clamp(2.5rem, 4vw + 1rem, 4rem);
+
+  /* ---- Spacing · 4-point base ---- */
+  --s-0:   2px;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   24px;
+  --s-6:   32px;
+  --s-7:   48px;
+  --s-8:   72px;
+  --s-9:   96px;
+  --s-10:  128px;
+
+  --prose:  62ch;   /* ~ 680px body column  */
+  --bleed:  1120px; /* full-width section cap */
+  --nav-h:  64px;
+
+  /* ---- Radii ---- */
+  --r-1:    4px;
+  --r-2:    8px;
+  --r-3:    14px;
+  --r-4:    20px;
+  --r-full: 9999px;
+
+  /* ---- Shadows (warm-neutral, layered) ---- */
+  --sh-1:   0 1px 2px rgba(10,37,64,0.04), 0 1px 3px rgba(10,37,64,0.04);
+  --sh-2:   0 2px 6px rgba(10,37,64,0.06), 0 8px 24px rgba(10,37,64,0.06);
+  --sh-3:   0 12px 32px rgba(10,37,64,0.10), 0 4px 12px rgba(10,37,64,0.06);
+  --sh-accent: 0 8px 24px rgba(194,24,91,0.22);
+
+  /* ---- Motion ---- */
+  --dur-1:  150ms;
+  --dur-2:  260ms;
+  --dur-3:  500ms;
+  --dur-4:  900ms;
+  --ease:   cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Intentionally same tokens — site is fixed-light for print-quality
+     charts and to avoid dark-mode redesign. */
+}

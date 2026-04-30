@@ -1,0 +1,24 @@
+# ── Development screenshots and audit images (root-level only) ───────────────
+/*.jpeg
+/*.jpg
+/*.png
+
+# ── Dev artefacts ─────────────────────────────────────────────────────────────
+/archive/
+/CLAUDE.md
+/.playwright-mcp/
+
+# ── Test dependencies and output ──────────────────────────────────────────────
+/tests/node_modules/
+/tests/results/
+/tests/screenshots/
+/tests/superpowers/
+
+# ── Tool config (not part of the site) ───────────────────────────────────────
+.opencode/
+.superpowers/
+
+# ── OS / editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/

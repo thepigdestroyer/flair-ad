@@ -1,0 +1,72 @@
+{
+  "qc_steps": [
+    {"step": "Raw nuclei",          "count": 80660,  "label": "Starting dataset (Mathys 2019)"},
+    {"step": "After doublet removal","count": 77821,  "label": "Doublets removed"},
+    {"step": "After QC filters",    "count": 51566,  "label": "Passing strict QC"},
+    {"step": "Pseudobulk-eligible", "count": 40122,  "label": "With ≥5 cells/donor/cell-type"}
+  ],
+  "deg_comparison": [
+    {
+      "method": "Pseudoreplication (Mathys)",
+      "cellType": "Excitatory neurons",
+      "degs": 1765,
+      "color": "#e74c3c"
+    },
+    {
+      "method": "Pseudoreplication (Mathys)",
+      "cellType": "Inhibitory neurons",
+      "degs": 1191,
+      "color": "#e74c3c"
+    },
+    {
+      "method": "Pseudoreplication (Mathys)",
+      "cellType": "Microglia",
+      "degs": 684,
+      "color": "#e74c3c"
+    },
+    {
+      "method": "Pseudoreplication (Mathys)",
+      "cellType": "Astrocytes",
+      "degs": 2138,
+      "color": "#e74c3c"
+    },
+    {
+      "method": "Pseudobulk (Murphy)",
+      "cellType": "Excitatory neurons",
+      "degs": 0,
+      "color": "#2ecc71"
+    },
+    {
+      "method": "Pseudobulk (Murphy)",
+      "cellType": "Inhibitory neurons",
+      "degs": 0,
+      "color": "#2ecc71"
+    },
+    {
+      "method": "Pseudobulk (Murphy)",
+      "cellType": "Microglia",
+      "degs": 25,
+      "color": "#2ecc71"
+    },
+    {
+      "method": "Pseudobulk (Murphy)",
+      "cellType": "Astrocytes",
+      "degs": 0,
+      "color": "#2ecc71"
+    }
+  ],
+  "pseudoreplication_scatter": [
+    {"donor": "D1", "cellCount": 312, "degCount": 1821, "diagnosis": "AD"},
+    {"donor": "D2", "cellCount": 489, "degCount": 2834, "diagnosis": "AD"},
+    {"donor": "D3", "cellCount": 721, "degCount": 4122, "diagnosis": "AD"},
+    {"donor": "D4", "cellCount": 198, "degCount": 1211, "diagnosis": "AD"},
+    {"donor": "D5", "cellCount": 856, "degCount": 4988, "diagnosis": "AD"},
+    {"donor": "D6", "cellCount": 623, "degCount": 3541, "diagnosis": "AD"},
+    {"donor": "D7", "cellCount": 284, "degCount": 1677, "diagnosis": "Control"},
+    {"donor": "D8", "cellCount": 541, "degCount": 3122, "diagnosis": "Control"},
+    {"donor": "D9", "cellCount": 392, "degCount": 2281, "diagnosis": "Control"},
+    {"donor": "D10","cellCount": 745, "degCount": 4312, "diagnosis": "Control"},
+    {"donor": "D11","cellCount": 167, "degCount": 988,  "diagnosis": "Control"},
+    {"donor": "D12","cellCount": 634, "degCount": 3677, "diagnosis": "Control"}
+  ]
+}

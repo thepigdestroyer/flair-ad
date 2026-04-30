@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Data explorer — GWAS loci, snRNA-seq DEGs, EWCE enrichment, aims, methods. FLAIR-AD · Mrinal Joshi / UK DRI Imperial." />
+  <title>Data explorer · FLAIR-AD</title>
+
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/charts.css" />
+  <link rel="stylesheet" href="css/data-page.css" />
+  <link rel="stylesheet" href="css/scrollytelling.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="nav-brand-name">FLAIR-AD</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="index.html">← Pitch</a>
+      <a class="nav-link nav-link--active" href="data.html">Data</a>
+      <a class="nav-link" href="index.html#forum">Forum</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="bleed">
+    <span class="eyebrow">Data explorer</span>
+    <h1>GWAS loci, DEGs, EWCE &mdash; reproduced end to end.</h1>
+    <p>
+      Every figure on this page is built from the raw JSON shipped with the site.
+      Click any chart to download the underlying data.
+    </p>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <nav class="tab-rail" id="tab-rail" aria-label="Data panel navigation">
+    <div class="bleed tab-rail-inner">
+      <div class="tab-rail-tabs" role="tablist" aria-label="Data sections">
+        <button class="tab is-active" role="tab" id="tab-overview"  aria-selected="true"  aria-controls="panel-overview"  data-panel="overview">Overview</button>
+        <button class="tab"           role="tab" id="tab-gwas"      aria-selected="false" aria-controls="panel-gwas"      data-panel="gwas">GWAS</button>
+        <button class="tab"           role="tab" id="tab-snrnaseq"  aria-selected="false" aria-controls="panel-snrnaseq"  data-panel="snrnaseq">snRNA-seq</button>
+        <button class="tab"           role="tab" id="tab-ewce"      aria-selected="false" aria-controls="panel-ewce"      data-panel="ewce">EWCE</button>
+        <button class="tab"           role="tab" id="tab-aims"      aria-selected="false" aria-controls="panel-aims"      data-panel="aims">Aims</button>
+        <button class="tab"           role="tab" id="tab-methods"   aria-selected="false" aria-controls="panel-methods"   data-panel="methods">Methods</button>
+      </div>
+      <select class="tab-mobile" id="tab-mobile" aria-label="Jump to section">
+        <option value="overview">Overview</option>
+        <option value="gwas">GWAS</option>
+        <option value="snrnaseq">snRNA-seq</option>
+        <option value="ewce">EWCE</option>
+        <option value="aims">Aims</option>
+        <option value="methods">Methods</option>
+      </select>
+    </div>
+  </nav>
+
+  <section class="panel is-active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <div class="bleed">
+      <div class="stat-grid">
+        <div class="stat-card stat-card--focal">
+          <div class="stat-num">29</div>
+          <div class="stat-label">GWAS risk loci</div>
+          <div class="stat-sub">Jansen 2019 · N = 455,258; 71,880 AD cases</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">~17</div>
+          <div class="stat-label">Microglial loci</div>
+          <div class="stat-sub">Nearest gene primarily expressed in microglia</div>
+        </div>
+        <div class="stat-card stat-card--focal">
+          <div class="stat-num">26</div>
+          <div class="stat-label">Robust DEGs</div>
+          <div class="stat-sub">Murphy 2023 · pseudobulk correction of Mathys 2019</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">25<span class="faint">/26</span></div>
+          <div class="stat-label">DEGs in microglia</div>
+          <div class="stat-sub">96% of robust DEGs from snRNA-seq reanalysis</div>
+        </div>
+        <div class="stat-card stat-card--focal">
+          <div class="stat-num">4.1σ</div>
+          <div class="stat-label">EWCE enrichment</div>
+          <div class="stat-sub">p &lt; 0.00001 · strongest signal across all disorders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">r<sub>g</sub>=0.81</div>
+          <div class="stat-label">AD ~ AD-by-proxy</div>
+          <div class="stat-sub">Genetic correlation (Jansen 2019)</div>
+        </div>
+      </div>
+
+      <figure id="fig-convergence" class="fig-block" style="margin-bottom:var(--s-7)"
+              aria-label="Three evidence streams converging on microglia"></figure>
+      <div class="overview-body">
+        <div>
+          <h2 class="section-title">Rationale</h2>
+          <p>
+            Converging evidence from GWAS, single-nucleus transcriptomics and EWCE
+            consistently implicates microglia as the primary cell type mediating
+            Alzheimer's genetic risk. The 29 Jansen <em>et al.</em> loci include
+            canonical microglial genes (<span class="gene mono">TREM2</span>,
+            <span class="gene mono">INPP5D</span>, <span class="gene mono">CD33</span>,
+            <span class="gene mono">MEF2C</span>, <span class="gene mono">MS4A</span>)
+            and the Murphy <em>et al.</em> pseudobulk reanalysis demonstrates
+            that 96% of robust gene-expression changes in AD brains occur in microglia.
+          </p>
+          <p>
+            This PhD project addresses the next question: <em>which specific
+            microglial enhancers are activated in the disease-associated state, and
+            where does IRF1 bind to drive this transition?</em> Standard ChIP-seq
+            cannot resolve this directly: commercially available anti-IRF1 antibodies
+            cross-react across the IRF family (IRF1&ndash;9 share a highly conserved
+            N-terminal DNA-binding domain), so peak calls cannot be unambiguously
+            attributed to IRF1 alone. This motivates a Prime Editing + CETCh-seq
+            strategy &mdash; epitope-tag a single endogenous IRF1 allele, then map
+            with anti-FLAG.
+          </p>
+          <div class="data-links">
+            <a class="data-link" href="data/gwas_loci.json" download>↓ GWAS loci JSON</a>
+            <a class="data-link" href="data/degs_table2.json" download>↓ DEG data JSON</a>
+            <a class="data-link" href="data/ewce_scores.json" download>↓ EWCE scores JSON</a>
+            <a class="data-link" href="data/qc_stats.json" download>↓ QC stats JSON</a>
+          </div>
+        </div>
+        <aside class="refs">
+          <h2 class="section-title">References</h2>
+          <ul class="ref-list">
+            <li>
+              <strong>Murphy et al. (2023)</strong> eLife 12:e90214.
+              "Avoiding false discoveries in single-cell RNA-seq by revisiting the
+              first Alzheimer's disease dataset."
+              <a class="link" href="https://elifesciences.org/articles/90214" target="_blank" rel="noopener">elifesciences.org ↗</a>
+            </li>
+            <li>
+              <strong>Jansen et al. (2019)</strong> Nature Genetics 51, 404–413.
+              "Genome-wide meta-analysis identifies new loci influencing
+              Alzheimer's disease risk."
+              <a class="link" href="https://www.nature.com/articles/s41588-018-0311-9" target="_blank" rel="noopener">nature.com ↗</a>
+            </li>
+            <li>
+              <strong>Skene &amp; Grant (2016)</strong> Front. Neurosci. 10:16.
+              "Identification of vulnerable cell types in major brain disorders
+              using single-cell transcriptomes and EWCE."
+              <a class="link" href="https://www.frontiersin.org/articles/10.3389/fnins.2016.00016/full" target="_blank" rel="noopener">frontiersin.org ↗</a>
+            </li>
+            <li>
+              <strong>Mathys et al. (2019)</strong> Nature 570, 332–337.
+              Original snRNA-seq dataset.
+              <a class="link" href="https://doi.org/10.7303/syn18485175" target="_blank" rel="noopener">Synapse syn18485175 ↗</a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-gwas" role="tabpanel" aria-labelledby="tab-gwas" hidden>
+    <div class="bleed">
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">Manhattan plot · 29 AD risk loci</h2>
+          <span class="chart-sub">Jansen 2019 meta-analysis · highlights microglial loci</span>
+        </div>
+        <div id="chart-manhattan-full" class="chart-container"></div>
+        <p class="chart-caption">
+          Each point is a genetic variant. Y-axis is <span class="mono">−log<sub>10</sub>(p)</span>; magenta marks loci whose nearest gene is primarily expressed in microglia. <span class="mono">APOE</span> is capped at 60 for visual sanity.
+        </p>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">Loci table</h2>
+          <span class="chart-sub">Sortable · click column headers</span>
+        </div>
+        <div class="data-table-wrap">
+          <table id="loci-table" class="data-table">
+            <thead>
+              <tr>
+                <th data-col="locus">#</th>
+                <th data-col="gene">Gene</th>
+                <th data-col="chr">Chr</th>
+                <th data-col="snp">Lead SNP</th>
+                <th data-col="or" class="num">OR</th>
+                <th data-col="logp" class="num">−log₁₀(p)</th>
+                <th>Microglial?</th>
+              </tr>
+            </thead>
+            <tbody id="loci-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-snrnaseq" role="tabpanel" aria-labelledby="tab-snrnaseq" hidden>
+    <div class="bleed panel-grid">
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">Volcano · AD vs. control</h2>
+          <span class="chart-sub">Murphy 2023 pseudobulk reanalysis</span>
+        </div>
+        <div id="chart-volcano-full" class="chart-container"></div>
+        <p class="chart-caption">
+          <strong>26 DEGs survive FDR</strong> after pseudobulk correction, down from 23,923
+          in the original Mathys analysis. Twenty-five are microglia-resident.
+        </p>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">DEG count by method</h2>
+          <span class="chart-sub">Pseudoreplication vs. pseudobulk</span>
+        </div>
+        <div id="chart-degbar" class="chart-container"></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">QC · nCount / nFeature / %mt</h2>
+          <span class="chart-sub">Per-sample distributions</span>
+        </div>
+        <div id="chart-qc" class="chart-container"></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">Robust DEGs · effect sizes</h2>
+          <span class="chart-sub">Directionality per gene</span>
+        </div>
+        <div id="chart-deg-table" class="chart-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-ewce" role="tabpanel" aria-labelledby="tab-ewce" hidden>
+    <div class="bleed">
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">EWCE · enrichment heatmap</h2>
+          <span class="chart-sub">7 disorders × 8 cell types · Skene &amp; Grant 2016</span>
+        </div>
+        <div id="chart-ewce-full" class="chart-container"></div>
+        <p class="chart-caption">
+          Colour scale shows standard deviations above the mean of 10,000 bootstrap samples.
+          Microglia are the top cell type for Alzheimer's at <span class="mono">ζ = 4.1σ</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-aims" role="tabpanel" aria-labelledby="tab-aims" hidden>
+    <div class="bleed">
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2 class="chart-title">Aim timeline</h2>
+          <span class="chart-sub">2026-Q3 → 2030-Q1</span>
+        </div>
+        <div id="fig-aims-gantt" class="chart-container"></div>
+        <div class="aim-timeline">
+          <div class="aim-row">
+            <div class="aim-meta">
+              <span class="pill pill--magenta">Aim 1 · In progress</span>
+              <span class="mono">2026 Q3 → 2027 Q2</span>
+            </div>
+            <p>Identify IRF1-responsive microglial enhancers via ATAC-seq + H3K27ac overlay with the 29 Jansen loci.</p>
+          </div>
+          <div class="aim-row">
+            <div class="aim-meta">
+              <span class="pill pill--ghost">Aim 2 · Upcoming</span>
+              <span class="mono">2027 Q3 → 2028 Q1</span>
+            </div>
+            <p>Prime-edit a 3×FLAG tag into the endogenous <span class="gene mono">IRF1</span> C-terminus in iPSC-derived microglia.</p>
+          </div>
+          <div class="aim-row">
+            <div class="aim-meta">
+              <span class="pill pill--ghost">Aim 3 · Upcoming</span>
+              <span class="mono">2028 Q2 → 2029 Q1</span>
+            </div>
+            <p>CETCh-seq the tagged line under baseline and DAM-induced conditions; intersect binding sites with GWAS loci.</p>
+          </div>
+          <div class="aim-row">
+            <div class="aim-meta">
+              <span class="pill pill--ghost">Aim 4 · Upcoming</span>
+              <span class="mono">2029 Q2 → 2030 Q1</span>
+            </div>
+            <p>Run stratified LD-score regression to partition AD heritability across IRF1-bound enhancers vs. control annotations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-methods" role="tabpanel" aria-labelledby="tab-methods" hidden>
+    <div class="bleed">
+      <div class="chart-wrap" style="margin-bottom:var(--s-7)">
+        <div class="chart-head">
+          <h2 class="chart-title">Analysis pipelines</h2>
+          <span class="chart-sub">snRNA-seq reanalysis · GWAS annotation · Prime Editing → CETCh-seq</span>
+        </div>
+        <div id="fig-pipeline"></div>
+      </div>
+    </div>
+    <div class="bleed prose methods-prose">
+      <h2 class="section-title">Methods</h2>
+
+      <h3>Single-nucleus RNA-seq reanalysis</h3>
+      <p>
+        Raw counts from <strong>Mathys et al. (2019)</strong> (Synapse syn18485175) were
+        reprocessed via Scanpy with standard QC filters (≥ 500 genes/cell,
+        &lt; 10% mitochondrial reads, doublet detection with scDblFinder) then
+        aggregated to per-sample pseudobulk using <code>decoupler</code>. Differential
+        expression used DESeq2 at sample level, with age, sex and pmi as covariates;
+        26 genes survive FDR &lt; 0.05 across six brain regions. Method follows
+        Murphy <em>et al.</em> (2023).
+      </p>
+
+      <h3>GWAS meta-analysis + annotation</h3>
+      <p>
+        Summary statistics: Jansen <em>et al.</em> 2019
+        (<span class="mono">N = 455,258</span>, 71,880 AD cases &amp; 383,378 controls).
+        Lead SNPs extracted at <span class="mono">p &lt; 5×10⁻⁸</span>;
+        coordinates intersected with ENCODE cCREs and CATlas microglia ATAC peaks
+        (<span class="mono">bedtools intersect</span>). Nearest-gene assignment via
+        GENCODE v44 protein-coding transcripts.
+      </p>
+
+      <h3>Prime Editing design (PE)</h3>
+      <p>
+        pegRNAs designed with PRIDICT 2.0 for the <span class="gene mono">IRF1</span>
+        C-terminus. Insert: 3×FLAG tag (<span class="mono">DYKDHDGDYKDHDIDYKDDDDK</span>),
+        preceded by a flexible GS linker. pegRNA and nicking sgRNA pairs are
+        screened in silico for predicted efficiency ≥ 40 % and off-target
+        CFD ≤ 0.1.
+      </p>
+
+      <h3>CETCh-seq protocol sketch</h3>
+      <p>
+        iPSC-derived microglia (Abud protocol) → Prime Editing co-electroporation
+        → FACS for edited cells → clonal expansion → genotype QC (Sanger + NGS) →
+        baseline / LPS+IFNγ-induced DAM states → ChIP with anti-FLAG beads →
+        paired-end sequencing at ~30 M reads/sample → MACS2 peak calling →
+        downstream motif + enrichment analysis.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-brand" href="/">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="nav-brand-name">FLAIR-AD</span>
+      </a>
+      <p>
+        Functional Landscape Analysis of Inflammatory Regulation in Alzheimer's
+        Disease. Data + methods are openly documented; code is on request.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <ul>
+        <li><a href="index.html">Pitch</a></li>
+        <li><a href="#panel-aims">Aims</a></li>
+        <li><a href="#panel-methods">Methods</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Data</h4>
+      <ul>
+        <li><a href="data/gwas_loci.json" download>gwas_loci.json</a></li>
+        <li><a href="data/degs_table2.json" download>degs_table2.json</a></li>
+        <li><a href="data/ewce_scores.json" download>ewce_scores.json</a></li>
+        <li><a href="data/qc_stats.json" download>qc_stats.json</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Host</h4>
+      <ul>
+        <li>UK Dementia Research Institute</li>
+        <li>Imperial College London</li>
+        <li>Skene Lab &middot; White City</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-foot">
+    <span>&copy; 2026 Mrinal Joshi · FLAIR-AD</span>
+    <span><a href="index.html">Back to pitch</a> · <a href="mailto:mrinal.joshi@ukdri.ac.uk">Email</a></span>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+<script src="js/tabs.js" defer></script>
+<script src="js/charts/util.js" defer></script>
+<script src="js/charts/manhattan.js" defer></script>
+<script src="js/charts/cell-types.js" defer></script>
+<script src="js/charts/ewce.js" defer></script>
+<script src="js/charts/volcano.js" defer></script>
+<script src="js/charts/qc.js" defer></script>
+<script src="js/charts/data-page.js" defer></script>
+<script src="js/figures/convergence.js" defer></script>
+<script src="js/figures/aims-gantt.js" defer></script>
+<script src="js/figures/pipeline.js" defer></script>
+
+</body>
+</html>
