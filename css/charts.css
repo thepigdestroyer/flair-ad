@@ -45,6 +45,26 @@
 }
 .chart-caption strong { color: var(--c-ink); }
 
+/* Inline download link in chart-head — pushes to far right with auto margin */
+.chart-dl {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--r-2);
+  background: var(--c-accent-wash);
+  color: var(--c-accent-deep);
+  font-family: var(--f-mono);
+  font-size: var(--fs-1);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  align-self: center;
+  transition: background var(--dur-1) var(--ease);
+}
+.chart-dl:hover { background: var(--c-accent-wash-2); color: var(--c-accent-deep); }
+
 /* Chart legend */
 .chart-legend {
   display: inline-flex;

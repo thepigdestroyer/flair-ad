@@ -54,8 +54,26 @@
     <h1>GWAS loci, DEGs, EWCE &mdash; reproduced end to end.</h1>
     <p>
       Every figure on this page is built from the raw JSON shipped with the site.
-      Click any chart to download the underlying data.
     </p>
+    <div class="dl-bar">
+      <span class="dl-bar-label">Download all data:</span>
+      <a class="dl-btn" href="data/gwas_loci.json" download>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        gwas_loci.json
+      </a>
+      <a class="dl-btn" href="data/degs_table2.json" download>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        degs_table2.json
+      </a>
+      <a class="dl-btn" href="data/ewce_scores.json" download>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ewce_scores.json
+      </a>
+      <a class="dl-btn" href="data/qc_stats.json" download>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        qc_stats.json
+      </a>
+    </div>
   </div>
 </header>
 
@@ -188,6 +206,10 @@
         <div class="chart-head">
           <h2 class="chart-title">Manhattan plot · 29 AD risk loci</h2>
           <span class="chart-sub">Jansen 2019 meta-analysis · highlights microglial loci</span>
+          <a class="chart-dl" href="data/gwas_loci.json" download aria-label="Download GWAS loci JSON">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            gwas_loci.json
+          </a>
         </div>
         <div id="chart-manhattan-full" class="chart-container"></div>
         <p class="chart-caption">
@@ -225,6 +247,10 @@
         <div class="chart-head">
           <h2 class="chart-title">Volcano · AD vs. control</h2>
           <span class="chart-sub">Murphy 2023 pseudobulk reanalysis</span>
+          <a class="chart-dl" href="data/degs_table2.json" download aria-label="Download DEG data JSON">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            degs_table2.json
+          </a>
         </div>
         <div id="chart-volcano-full" class="chart-container"></div>
         <p class="chart-caption">
@@ -243,6 +269,10 @@
         <div class="chart-head">
           <h2 class="chart-title">QC · nCount / nFeature / %mt</h2>
           <span class="chart-sub">Per-sample distributions</span>
+          <a class="chart-dl" href="data/qc_stats.json" download aria-label="Download QC stats JSON">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            qc_stats.json
+          </a>
         </div>
         <div id="chart-qc" class="chart-container"></div>
       </div>
@@ -262,6 +292,10 @@
         <div class="chart-head">
           <h2 class="chart-title">EWCE · enrichment heatmap</h2>
           <span class="chart-sub">7 disorders × 8 cell types · Skene &amp; Grant 2016</span>
+          <a class="chart-dl" href="data/ewce_scores.json" download aria-label="Download EWCE scores JSON">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            ewce_scores.json
+          </a>
         </div>
         <div id="chart-ewce-full" class="chart-container"></div>
         <p class="chart-caption">

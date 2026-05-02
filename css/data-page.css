@@ -244,6 +244,38 @@
 .aim-meta .mono { color: var(--c-ink-3); font-size: var(--fs-1); }
 .aim-row p { margin: 0; font-size: var(--fs-3); line-height: 1.55; color: var(--c-ink-2); }
 
+/* ───────── Download bar (page header) ───────── */
+
+.dl-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+}
+.dl-bar-label {
+  font-size: var(--fs-2);
+  color: var(--c-ink-3);
+  margin-right: var(--s-1);
+  white-space: nowrap;
+}
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--r-2);
+  background: var(--c-accent-wash);
+  color: var(--c-accent-deep);
+  font-family: var(--f-mono);
+  font-size: var(--fs-1);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background var(--dur-1) var(--ease);
+}
+.dl-btn:hover { background: var(--c-accent-wash-2); color: var(--c-accent-deep); }
+.dl-btn svg   { flex-shrink: 0; }
+
 /* ───────── Methods prose ───────── */
 
 .methods-prose h3 {
