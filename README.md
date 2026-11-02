@@ -2,7 +2,7 @@
 
 **F**lag-tag **L**inear-**A**mplification **IR**F-binding in **A**lzheimer's **D**isease
 
-A public-facing companion site for a 4-year PhD at the **UK Dementia Research Institute at Imperial College London** (Skene Lab). The project maps where IRF1 — a candidate master-regulator transcription factor — binds across microglial states, and connects those binding sites to Alzheimer's genetic risk.
+A public-facing companion site for a proposed 4-year PhD at the **UK Dementia Research Institute at Imperial College London** (Skene Lab). The project maps where IRF1 — a candidate master-regulator transcription factor — binds across microglial states, and connects those binding sites to Alzheimer's genetic risk.
 
 **Live site → [flair-ad.netlify.app](https://flair-ad.netlify.app)**
 
