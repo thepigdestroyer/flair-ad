@@ -42,7 +42,7 @@ A public-facing companion site for a proposed 4-year PhD at the **UK Dementia Re
 | Figures | Custom SVG (IIFEs injected on `DOMContentLoaded`) |
 | Animations | GSAP + ScrollTrigger |
 | Community | Firebase Firestore (forum + survey) |
-| Hosting | Netlify (auto-deploys from `main`) |
+| Hosting | Netlify (manual deploys, see Deployment) |
 | Tests | Playwright |
 
 ---
@@ -143,7 +143,7 @@ npm test
 
 ## Deployment
 
-Netlify watches the `main` branch and deploys automatically on every push. There is no build step — Netlify serves the static files directly from the repo root.
+The Netlify site (`flair-ad`, team "ARUK PhD Website") is **not** connected to this repo, so a push does not deploy. Deploy by hand: zip `index.html`, `data.html`, `css/`, `js/` and `data/` (for example `git archive --format=zip -o site.zip HEAD index.html data.html css js data`) and drop it on the project's Deploys page, or use `netlify deploy --prod`. There is no build step.
 
 ---
 
