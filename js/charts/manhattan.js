@@ -40,7 +40,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'Mini Manhattan plot');
+      .attr('role', 'img')
+      .attr('aria-label', 'Manhattan plot of 29 Alzheimer\'s disease risk loci from the Jansen 2019 meta-analysis; loci whose nearest gene is mainly expressed in microglia are highlighted in magenta');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);
@@ -129,7 +130,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'Full Manhattan plot');
+      .attr('role', 'img')
+      .attr('aria-label', 'Manhattan plot of 29 Alzheimer\'s disease risk loci from the Jansen 2019 meta-analysis, by chromosome position and significance (minus log10 p). Loci whose nearest gene is mainly expressed in microglia are highlighted in magenta; APOE is the strongest signal and is capped at 60 for display');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);

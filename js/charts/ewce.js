@@ -62,7 +62,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'EWCE heatmap preview');
+      .attr('role', 'img')
+      .attr('aria-label', 'Heatmap preview of EWCE cell-type enrichment: microglia show the strongest enrichment for Alzheimer\'s disease, at 4.1 standard deviations above the mean');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);
@@ -148,7 +149,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'EWCE full heatmap');
+      .attr('role', 'img')
+      .attr('aria-label', 'Heatmap of EWCE cell-type enrichment for 7 brain disorders across 8 cell types. Microglia are the top cell type for Alzheimer\'s disease (4.1 standard deviations above the mean, p below 0.00001); schizophrenia and autism enrich instead in pyramidal neurons');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);

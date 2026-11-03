@@ -2,6 +2,8 @@
 /*.jpeg
 /*.jpg
 /*.png
+!/og.png
+!/apple-touch-icon.png
 
 # ── Dev artefacts ─────────────────────────────────────────────────────────────
 /archive/

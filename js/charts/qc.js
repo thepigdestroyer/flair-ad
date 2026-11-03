@@ -24,7 +24,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'QC waterfall chart');
+      .attr('role', 'img')
+      .attr('aria-label', 'Waterfall chart of nuclei remaining after each quality-control step: 80,660 raw, 77,821 after doublet removal, 51,566 after QC filters, 40,122 eligible for pseudobulk analysis');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);
@@ -150,7 +151,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'DEG count comparison: pseudoreplication vs pseudobulk');
+      .attr('role', 'img')
+      .attr('aria-label', 'Bar chart of differentially expressed gene counts by method. Pseudoreplication finds 1,765 in excitatory neurons, 1,191 in inhibitory neurons, 684 in microglia and 2,138 in astrocytes; pseudobulk finds none in neurons or astrocytes and 25 in microglia');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);

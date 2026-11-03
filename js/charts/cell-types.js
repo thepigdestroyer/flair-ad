@@ -39,7 +39,8 @@
       .attr('height', height)
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMidYMid meet')
-      .attr('aria-label', 'Microglia carry 25 of the 26 robust differentially expressed genes in Alzheimer brains (Murphy 2023)');
+      .attr('role', 'img')
+      .attr('aria-label', 'Bar chart of cell types: microglia carry 25 of the 26 robust differentially expressed genes in Alzheimer\'s disease brains (Murphy 2023 reanalysis)');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);

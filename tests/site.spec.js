@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const PAGES = [
   { name: 'index', path: '/' },
-  { name: 'scientist', path: '/scientist.html' },
+  { name: 'scientist', path: '/data.html' },
 ];
 
 const SCREENSHOT_DIR = path.resolve('./screenshots');
@@ -85,6 +85,7 @@ for (const pg of PAGES) {
     });
 
     test(`${pg.name} · hero fits one viewport`, async ({ page }) => {
+      test.skip(pg.name === 'scientist', 'data.html has a page header, not a hero');
       await gotoPage(page, pg.path);
       const heroBox = await page.evaluate(() => {
         const hero =

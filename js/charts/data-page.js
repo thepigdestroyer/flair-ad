@@ -112,7 +112,8 @@
         .append('svg')
         .attr('width', width)
         .attr('height', height)
-        .attr('aria-label', 'DEG effect sizes – lollipop chart');
+        .attr('role', 'img')
+      .attr('aria-label', 'Lollipop chart of effect sizes (log fold change) for the 26 robust differentially expressed genes in Alzheimer\'s disease: 21 are up-regulated, including APOE, TREM2 and CSF1R, and 5 are down-regulated, including CX3CR1');
 
       const g = svg.append('g')
         .attr('transform', `translate(${margin.l},${margin.t})`);

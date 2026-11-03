@@ -35,7 +35,8 @@
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('aria-label', 'Volcano plot of differentially expressed genes');
+      .attr('role', 'img')
+      .attr('aria-label', 'Volcano plot of the 26 robust differentially expressed genes in Alzheimer\'s disease versus control (Murphy 2023 pseudobulk reanalysis); APOE, TREM2 and CSF1R are up-regulated and CX3CR1 is down-regulated');
 
     const g = svg.append('g')
       .attr('transform', `translate(${margin.l},${margin.t})`);

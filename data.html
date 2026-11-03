@@ -1,12 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Data explorer — GWAS loci, snRNA-seq DEGs, EWCE enrichment, aims, methods. FLAIR-AD · Mrinal Joshi / UK DRI Imperial." />
-  <title>Data explorer · FLAIR-AD</title>
+  <title>Microglia in Alzheimer's: GWAS, EWCE, DEG Data | FLAIR-AD</title>
+  <meta name="description" content="Open data behind a proposed PhD on microglia in Alzheimer's disease: GWAS risk loci, snRNA-seq differential expression, EWCE enrichment and methods, as JSON." />
+  <link rel="canonical" href="https://flair-ad.netlify.app/data.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Mrinal Joshi" />
+  <link rel="author" href="https://mrinal.is-a.dev/" />
+  <meta name="theme-color" content="#c2185b" />
 
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FLAIR-AD" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:url" content="https://flair-ad.netlify.app/data.html" />
+  <meta property="og:title" content="Microglia in Alzheimer's: GWAS, EWCE, DEG Data | FLAIR-AD" />
+  <meta property="og:description" content="Open data behind a proposed PhD on microglia in Alzheimer's disease: GWAS risk loci, snRNA-seq differential expression, EWCE enrichment and methods, as JSON." />
+  <meta property="og:image" content="https://flair-ad.netlify.app/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="FLAIR-AD: the broken switch (IRF1) that turns the brain's gardeners into disease-associated microglia in Alzheimer's disease. A proposed PhD." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Microglia in Alzheimer's: GWAS, EWCE, DEG Data | FLAIR-AD" />
+  <meta name="twitter:description" content="Open data behind a proposed PhD on microglia in Alzheimer's disease: GWAS risk loci, snRNA-seq differential expression, EWCE enrichment and methods, as JSON." />
+  <meta name="twitter:image" content="https://flair-ad.netlify.app/og.png" />
+  <meta name="twitter:image:alt" content="FLAIR-AD: the broken switch (IRF1) that turns the brain's gardeners into disease-associated microglia in Alzheimer's disease. A proposed PhD." />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://flair-ad.netlify.app/#website",
+      "url": "https://flair-ad.netlify.app/",
+      "name": "FLAIR-AD",
+      "description": "Public companion site for a proposed PhD on IRF1 and disease-associated microglia in Alzheimer's disease.",
+      "inLanguage": "en-GB",
+      "author": {
+        "@type": "Person",
+        "@id": "https://mrinal.is-a.dev/#person",
+        "name": "Mrinal Joshi",
+        "url": "https://mrinal.is-a.dev/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "@id": "https://mrinal.is-a.dev/#person",
+        "name": "Mrinal Joshi",
+        "url": "https://mrinal.is-a.dev/"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://flair-ad.netlify.app/data.html#webpage",
+      "url": "https://flair-ad.netlify.app/data.html",
+      "name": "Microglia in Alzheimer's: GWAS, EWCE, DEG Data | FLAIR-AD",
+      "description": "Open data behind a proposed PhD on microglia in Alzheimer's disease: GWAS risk loci, snRNA-seq differential expression, EWCE enrichment and methods, as JSON.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://flair-ad.netlify.app/#website"
+      },
+      "about": {
+        "@id": "https://flair-ad.netlify.app/#proposal"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://flair-ad.netlify.app/og.png",
+        "width": 1200,
+        "height": 630
+      },
+      "dateModified": "2026-11-03",
+      "author": {
+        "@type": "Person",
+        "@id": "https://mrinal.is-a.dev/#person",
+        "name": "Mrinal Joshi",
+        "url": "https://mrinal.is-a.dev/"
+      },
+      "breadcrumb": {
+        "@id": "https://flair-ad.netlify.app/data.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://flair-ad.netlify.app/data.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FLAIR-AD",
+          "item": "https://flair-ad.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Data explorer",
+          "item": "https://flair-ad.netlify.app/data.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +120,7 @@
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/layout.css?v=4" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/charts.css" />
   <link rel="stylesheet" href="css/data-page.css" />
@@ -51,7 +152,7 @@
 <header class="page-header">
   <div class="bleed">
     <span class="eyebrow">Data explorer</span>
-    <h1>GWAS loci, DEGs, EWCE &mdash; reproduced end to end.</h1>
+    <h1>Microglia in Alzheimer's disease: GWAS loci, DEGs and EWCE, reproduced end to end.</h1>
     <p>
       Every figure on this page is built from the raw JSON shipped with the site.
     </p>
@@ -136,7 +237,7 @@
       </div>
 
       <figure id="fig-convergence" class="fig-block" style="margin-bottom:var(--s-7)"
-              aria-label="Three evidence streams converging on microglia"></figure>
+              aria-label="Diagram: GWAS, snRNA-seq and EWCE evidence streams converge on microglia in Alzheimer's disease"></figure>
       <div class="overview-body">
         <div>
           <h2 class="section-title">Rationale</h2>
@@ -313,7 +414,7 @@
           <h2 class="chart-title">Aim timeline</h2>
           <span class="chart-sub">2026-Q3 → 2030-Q1</span>
         </div>
-        <div id="fig-aims-gantt" class="chart-container"></div>
+        <div id="fig-aims-gantt" class="chart-container" role="group" aria-label="Gantt timeline of the four aims of the proposed PhD; the aim rows below describe each one in text"></div>
         <div class="aim-timeline">
           <div class="aim-row">
             <div class="aim-meta">
@@ -355,7 +456,7 @@
           <h2 class="chart-title">Analysis pipelines</h2>
           <span class="chart-sub">snRNA-seq reanalysis · GWAS annotation · Prime Editing → CETCh-seq</span>
         </div>
-        <div id="fig-pipeline"></div>
+        <div id="fig-pipeline" role="group" aria-label="Overview of the analysis pipelines used in the project, described in text in the methods below"></div>
       </div>
     </div>
     <div class="bleed prose methods-prose">
@@ -442,8 +543,19 @@
       </ul>
     </div>
   </div>
+  <div class="footer-network">
+    <p class="footer-by">By <a href="https://mrinal.is-a.dev/" rel="author">Mrinal Joshi</a>, Research Assistant in the Skene Lab. FLAIR-AD is a proposed PhD.</p>
+    <p class="footer-more"><span>More by Mrinal</span>
+      <a href="https://mrinal.is-a.dev/">Portfolio</a>
+      <a href="https://m-joshi.ai.studio/">AI Studio</a>
+      <a href="https://m-lab.is-an.ai/">Positive Control</a>
+      <a href="https://mj-forge.is-an.ai/">A day at the bench</a>
+      <a href="https://hearth.is-an.ai/">Hearth</a>
+      <a href="https://drouter-demo.vercel.app/">deRoute</a>
+    </p>
+  </div>
   <div class="footer-foot">
-    <span>&copy; 2026 Mrinal Joshi · FLAIR-AD</span>
+    <span>&copy; 2026 <a href="https://mrinal.is-a.dev/" rel="author">Mrinal Joshi</a> · FLAIR-AD · Proposed PhD</span>
     <span><a href="index.html">Back to pitch</a> · <a href="mailto:mrinal.joshi@ukdri.ac.uk">Email</a></span>
   </div>
 </footer>

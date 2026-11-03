@@ -253,3 +253,24 @@
   max-width: 56ch;
   margin: 0;
 }
+
+/* Footer network / authorship (SEO identity links) */
+.footer-network {
+  max-width: var(--bleed);
+  margin: var(--s-6) auto 0;
+  padding: var(--s-5) var(--s-5) 0;
+  border-top: 1px solid var(--c-rule);
+  font-size: var(--fs-2);
+  color: var(--c-ink-2);
+}
+.footer-network p { margin: 0 0 var(--s-2); max-width: none; }
+.footer-network a { color: var(--c-ink-2); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--c-rule-strong); }
+.footer-network a:hover { color: var(--c-accent); }
+.footer-more { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); align-items: baseline; }
+.footer-more span {
+  font-size: var(--fs-0);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-ink-3);
+}

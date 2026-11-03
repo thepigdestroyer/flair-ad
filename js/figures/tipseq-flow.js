@@ -345,7 +345,7 @@
 
     const svg = `
       <svg viewBox="0 0 ${W} ${H}" role="img"
-           aria-label="TIP-seq four-step workflow"
+           aria-label="TIP-seq five-step workflow: antibody finds the protein, Tn5 cuts and tags DNA, T7 makes linear RNA copies, tagged copies are sequenced, pile-up peaks map the binding sites"
            style="width:100%;max-width:${W}px;display:block;margin:0 auto;overflow:visible">
         ${stepsSvg}
         ${arrowsSvg}

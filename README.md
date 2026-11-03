@@ -14,6 +14,9 @@ A public-facing companion site for a proposed 4-year PhD at the **UK Dementia Re
 |------|----------|---------|
 | `index.html` | General public | Plain-language story of the science |
 | `data.html` | Scientists / collaborators | Evidence dashboard with interactive charts |
+| `404.html` | Anyone on a bad URL | Styled not-found page (Netlify serves it with a 404 status) |
+
+Crawl and sharing files at the root: `robots.txt`, `sitemap.xml`, the IndexNow key file (`<key>.txt`), `og.png` (1200x630 social card), `apple-touch-icon.png`, `favicon.ico`, `favicon.svg`. Canonical URLs are `https://flair-ad.netlify.app/` and `https://flair-ad.netlify.app/data.html`; keep the sitemap in step with them.
 
 ### `index.html` — public page covers
 
@@ -132,7 +135,10 @@ Right-click `index.html` → *Open with Live Server*
 
 ## Running tests
 
+`tests/serve.mjs` is a static server that mimics Netlify (unknown paths return `404.html` with status 404). `seo.spec.js` checks titles, descriptions, canonicals, Open Graph, JSON-LD, robots, sitemap, the IndexNow key and the 404.
+
 ```bash
+node tests/serve.mjs &        # http://127.0.0.1:8000
 cd tests
 npm install
 npx playwright install --with-deps chromium
@@ -143,7 +149,7 @@ npm test
 
 ## Deployment
 
-The Netlify site (`flair-ad`, team "ARUK PhD Website") is **not** connected to this repo, so a push does not deploy. Deploy by hand: zip `index.html`, `data.html`, `css/`, `js/` and `data/` (for example `git archive --format=zip -o site.zip HEAD index.html data.html css js data`) and drop it on the project's Deploys page, or use `netlify deploy --prod`. There is no build step.
+The Netlify site (`flair-ad`, team "ARUK PhD Website") is **not** connected to this repo, so a push does not deploy. Deploy by hand: zip the site files, which are `index.html`, `data.html`, `404.html`, `robots.txt`, `sitemap.xml`, the IndexNow key `.txt`, `og.png`, `apple-touch-icon.png`, `favicon.ico`, `favicon.svg`, `css/`, `js/` and `data/` (for example `git archive --format=zip -o site.zip HEAD index.html data.html 404.html robots.txt sitemap.xml b3e3066c7789b0706e31f432ae6f20bf.txt og.png apple-touch-icon.png favicon.ico favicon.svg css js data`) and drop it on the project's Deploys page, or use `netlify deploy --prod`. There is no build step.
 
 ---
 
