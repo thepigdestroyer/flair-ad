@@ -210,9 +210,9 @@
           <div class="stat-sub">Jansen 2019 · N = 455,258; 71,880 AD cases</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">~17</div>
+          <div class="stat-num" data-linked-loci>19</div>
           <div class="stat-label">Microglial loci</div>
-          <div class="stat-sub">Nearest gene primarily expressed in microglia</div>
+          <div class="stat-sub">Mapping to <span data-linked-genes>16</span> genes whose nearest gene is primarily expressed in microglia</div>
         </div>
         <div class="stat-card stat-card--focal">
           <div class="stat-num">26</div>
@@ -412,35 +412,35 @@
       <div class="chart-wrap">
         <div class="chart-head">
           <h2 class="chart-title">Aim timeline</h2>
-          <span class="chart-sub">2026-Q3 → 2030-Q1</span>
+          <span class="chart-sub" data-aims-span>2026 Q4 → 2030 Q3</span>
         </div>
         <div id="fig-aims-gantt" class="chart-container" role="group" aria-label="Gantt timeline of the four aims of the proposed PhD; the aim rows below describe each one in text"></div>
         <div class="aim-timeline">
           <div class="aim-row">
             <div class="aim-meta">
               <span class="pill pill--magenta">Aim 1 · In progress</span>
-              <span class="mono">2026 Q3 → 2027 Q2</span>
+              <span class="mono" data-aim-range="1">2026 Q4 → 2027 Q3</span>
             </div>
             <p>Identify IRF1-responsive microglial enhancers via ATAC-seq + H3K27ac overlay with the 29 Jansen loci.</p>
           </div>
           <div class="aim-row">
             <div class="aim-meta">
               <span class="pill pill--ghost">Aim 2 · Upcoming</span>
-              <span class="mono">2027 Q3 → 2028 Q1</span>
+              <span class="mono" data-aim-range="2">2027 Q4 → 2028 Q3</span>
             </div>
             <p>Prime-edit a 3×FLAG tag into the endogenous <span class="gene mono">IRF1</span> C-terminus in iPSC-derived microglia.</p>
           </div>
           <div class="aim-row">
             <div class="aim-meta">
               <span class="pill pill--ghost">Aim 3 · Upcoming</span>
-              <span class="mono">2028 Q2 → 2029 Q1</span>
+              <span class="mono" data-aim-range="3">2028 Q4 → 2029 Q3</span>
             </div>
             <p>CETCh-seq the tagged line under baseline and DAM-induced conditions; intersect binding sites with GWAS loci.</p>
           </div>
           <div class="aim-row">
             <div class="aim-meta">
               <span class="pill pill--ghost">Aim 4 · Upcoming</span>
-              <span class="mono">2029 Q2 → 2030 Q1</span>
+              <span class="mono" data-aim-range="4">2029 Q4 → 2030 Q3</span>
             </div>
             <p>Run stratified LD-score regression to partition AD heritability across IRF1-bound enhancers vs. control annotations.</p>
           </div>
@@ -513,8 +513,8 @@
         <span class="nav-brand-name">FLAIR-AD</span>
       </a>
       <p>
-        Functional Landscape Analysis of Inflammatory Regulation in Alzheimer's
-        Disease. Data + methods are openly documented; code is on request.
+        Flag-tag Linear-Amplification IRF-binding in Alzheimer's Disease.
+        Data + methods are openly documented; code is on request.
       </p>
     </div>
     <div class="footer-col">

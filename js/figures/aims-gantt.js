@@ -5,8 +5,6 @@
 (function () {
   'use strict';
 
-  if (typeof d3 === 'undefined') return;
-
   // PhD: 01/10/2026 → 30/09/2030. Year 1 = Q4 2026 → Q3 2027.
   const AIMS = [
     { label: 'Aim 1 · Tag IRF1 in HCT116',     start: [2026,4], end: [2027,3], active: true  },
@@ -15,7 +13,25 @@
     { label: 'Aim 4 · Connect to AD genetics', start: [2029,4], end: [2030,3], active: false },
   ];
 
+  // Single source of truth for the aim dates: data.html reads the same list
+  // (aim rows and chart sub-title are filled from it on DOMContentLoaded).
+  window.FLAIR = window.FLAIR || {};
+  window.FLAIR.aims = AIMS;
+
   function toDecimal([yr, q]) { return yr + (q - 1) / 4; }
+  // End quarters are inclusive, so a bar ends where the following quarter starts.
+  function endDecimal(q) { return toDecimal(q) + 0.25; }
+  const fmt = ([yr, q]) => `${yr} Q${q}`;
+
+  function fillDates() {
+    document.querySelectorAll('[data-aim-range]').forEach(n => {
+      const aim = AIMS[Number(n.dataset.aimRange) - 1];
+      if (aim) n.textContent = `${fmt(aim.start)} \u2192 ${fmt(aim.end)}`;
+    });
+    document.querySelectorAll('[data-aims-span]').forEach(n => {
+      n.textContent = `${fmt(AIMS[0].start)} \u2192 ${fmt(AIMS[AIMS.length - 1].end)}`;
+    });
+  }
 
   function build(el, width, animate) {
     const P = window.FLAIR?.chartUtil?.PALETTE || {};
@@ -108,7 +124,7 @@
     // Aim bars
     AIMS.forEach(aim => {
       const x0 = Math.max(0, xScale(toDecimal(aim.start)));
-      const x1 = Math.min(innerW, xScale(toDecimal(aim.end)));
+      const x1 = Math.min(innerW, xScale(endDecimal(aim.end)));
       const barW = Math.max(1, x1 - x0);
       const y  = yScale(aim.label);
       const bh = Math.max(8, yScale.bandwidth());
@@ -236,6 +252,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    fillDates();
+    if (typeof d3 === 'undefined') return;
     const el = document.getElementById('fig-aims-gantt');
     if (!el) return;
 

@@ -251,6 +251,11 @@
   document.addEventListener('DOMContentLoaded', () => {
     initLociTable();
 
+    window.FLAIR.lociSummary().then(s => {
+      document.querySelectorAll('[data-linked-loci]').forEach(n => { n.textContent = s.linked; });
+      document.querySelectorAll('[data-linked-genes]').forEach(n => { n.textContent = s.genes; });
+    }).catch(err => console.warn('data-page: could not compute microglial loci count', err));
+
     // DEG lollipop lives in a hidden tabbed panel; lazyBuild's IntersectionObserver
     // may not re-fire after display:none is removed. Use lazyBuild normally, but
     // also listen for the flair:buildempty event dispatched by tabs.js.

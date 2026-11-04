@@ -81,3 +81,42 @@ test('unknown paths return the styled 404', async ({ request }) => {
   expect(r.status()).toBe(404);
   expect(await r.text()).toContain('Page not found');
 });
+
+const EXPANSION = "Flag-tag Linear-Amplification IRF-binding in Alzheimer's Disease";
+
+test.describe('Content consistency', () => {
+  test('acronym expansion and deRoute link (unchanged) are consistent on both pages', async ({ page }) => {
+    for (const file of ['/', '/data.html']) {
+      await page.goto(file, { waitUntil: 'domcontentloaded' });
+      const html = await page.content();
+      expect(html).not.toContain('Functional Landscape');
+      expect(html).not.toContain('deroute.is-an.ai');
+      expect(await page.locator('.footer-brand p').innerText()).toContain(EXPANSION);
+      expect(await page.locator('.footer-more a[href="https://drouter-demo.vercel.app/"]').count()).toBe(1);
+    }
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const ld = await page.locator('script[type="application/ld+json"]').first().innerText();
+    expect(ld).toContain(EXPANSION);
+  });
+
+  test('data page timeline matches the home page Gantt', async ({ page }) => {
+    await page.goto('/data.html', { waitUntil: 'load' });
+    await expect(page.locator('[data-aims-span]')).toHaveText('2026 Q4 → 2030 Q3');
+    const ranges = await page.locator('[data-aim-range]').allInnerTexts();
+    expect(ranges).toEqual([
+      '2026 Q4 → 2027 Q3', '2027 Q4 → 2028 Q3', '2028 Q4 → 2029 Q3', '2029 Q4 → 2030 Q3',
+    ]);
+  });
+
+  test('microglial loci count is computed from the JSON', async ({ page }) => {
+    await page.goto('/data.html', { waitUntil: 'load' });
+    const rows = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/gwas_loci.json'), 'utf8'));
+    const linked = rows.filter((d) => d.linked);
+    const genes = new Set(linked.map((d) => d.nearestGene)).size;
+    await expect(page.locator('.stat-num[data-linked-loci]')).toHaveText(String(linked.length));
+    await expect(page.locator('[data-linked-genes]')).toHaveText(String(genes));
+    expect(linked.length).toBe(19);
+    expect(genes).toBe(16);
+    expect(await page.content()).not.toContain('~17');
+  });
+});

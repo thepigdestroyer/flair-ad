@@ -26,7 +26,7 @@
         { text: 'Lead SNPs', sub: 'p < 5×10⁻⁸' },
         { text: 'bedtools', sub: 'ENCODE cCREs + ATAC' },
         { text: 'GENCODE v44', sub: 'nearest gene' },
-        { text: '29 loci', sub: '~17 microglial', terminal: true },
+        { text: '29 loci', sub: '<span data-linked-loci>19</span> microglial', terminal: true },
       ],
     },
     {
@@ -126,6 +126,10 @@
     });
 
     el.appendChild(wrapper);
+
+    window.FLAIR?.lociSummary?.().then(s => {
+      el.querySelectorAll('[data-linked-loci]').forEach(n => { n.textContent = s.linked; });
+    }).catch(() => {});
   }
 
   document.addEventListener('DOMContentLoaded', () => {

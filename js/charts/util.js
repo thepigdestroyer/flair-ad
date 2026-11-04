@@ -114,8 +114,28 @@
     if (_tip) _tip.classList.remove('visible');
   }
 
+  // Microglial-locus counts, computed once from data/gwas_loci.json.
+  // `linked` loci are those whose nearest gene is primarily expressed in microglia.
+  let _lociSummary = null;
+  function lociSummary() {
+    if (!_lociSummary) {
+      _lociSummary = fetch('data/gwas_loci.json')
+        .then(r => r.json())
+        .then(rows => {
+          const linked = rows.filter(d => d.linked);
+          return {
+            total: rows.length,
+            linked: linked.length,
+            genes: new Set(linked.map(d => d.nearestGene || d.gene)).size,
+          };
+        });
+    }
+    return _lociSummary;
+  }
+
   // Expose globally so every chart file can use these without ES modules.
   window.FLAIR = window.FLAIR || {};
+  window.FLAIR.lociSummary = lociSummary;
   window.FLAIR.chartUtil = {
     PALETTE, debounce, observeResize, lazyBuild,
     tooltip, showTip, hideTip,
