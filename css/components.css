@@ -319,7 +319,6 @@
 .paradigm-card--old {
   background: var(--c-paper-2);
   filter: saturate(0.6);
-  opacity: 0.92;
 }
 .paradigm-card--new {
   border: 1.5px solid var(--c-accent);

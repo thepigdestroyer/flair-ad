@@ -109,22 +109,24 @@
   </script>
 
 
+  <!-- Fonts: the CSS is fetched without blocking first paint, then applied (display=swap) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 
   <script src="https://d3js.org/d3.v7.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css?v=4" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/charts.css" />
-  <link rel="stylesheet" href="css/data-page.css" />
-  <link rel="stylesheet" href="css/scrollytelling.css" />
+  <!-- bump ?v= when a file changes: static files are cached for a day, see _headers -->
+  <link rel="stylesheet" href="css/tokens.css?v=1" />
+  <link rel="stylesheet" href="css/base.css?v=1" />
+  <link rel="stylesheet" href="css/layout.css?v=5" />
+  <link rel="stylesheet" href="css/components.css?v=23" />
+  <link rel="stylesheet" href="css/charts.css?v=23" />
+  <link rel="stylesheet" href="css/data-page.css?v=1" />
+  <link rel="stylesheet" href="css/scrollytelling.css?v=1" />
 </head>
 <body>
 
@@ -137,9 +139,9 @@
       <span class="nav-brand-name">FLAIR-AD</span>
     </a>
     <div class="nav-links" id="nav-links">
-      <a class="nav-link" href="index.html">← Pitch</a>
+      <a class="nav-link" href="/">← Pitch</a>
       <a class="nav-link nav-link--active" href="data.html">Data</a>
-      <a class="nav-link" href="index.html#forum">Forum</a>
+      <a class="nav-link" href="/#forum">Forum</a>
     </div>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -307,7 +309,7 @@
         <div class="chart-head">
           <h2 class="chart-title">Manhattan plot · 29 AD risk loci</h2>
           <span class="chart-sub">Jansen 2019 meta-analysis · highlights microglial loci</span>
-          <a class="chart-dl" href="data/gwas_loci.json" download aria-label="Download GWAS loci JSON">
+          <a class="chart-dl" href="data/gwas_loci.json" download aria-label="Download gwas_loci.json">
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             gwas_loci.json
           </a>
@@ -348,7 +350,7 @@
         <div class="chart-head">
           <h2 class="chart-title">Volcano · AD vs. control</h2>
           <span class="chart-sub">Murphy 2023 pseudobulk reanalysis</span>
-          <a class="chart-dl" href="data/degs_table2.json" download aria-label="Download DEG data JSON">
+          <a class="chart-dl" href="data/degs_table2.json" download aria-label="Download degs_table2.json">
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             degs_table2.json
           </a>
@@ -370,7 +372,7 @@
         <div class="chart-head">
           <h2 class="chart-title">QC · nCount / nFeature / %mt</h2>
           <span class="chart-sub">Per-sample distributions</span>
-          <a class="chart-dl" href="data/qc_stats.json" download aria-label="Download QC stats JSON">
+          <a class="chart-dl" href="data/qc_stats.json" download aria-label="Download qc_stats.json">
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             qc_stats.json
           </a>
@@ -393,7 +395,7 @@
         <div class="chart-head">
           <h2 class="chart-title">EWCE · enrichment heatmap</h2>
           <span class="chart-sub">7 disorders × 8 cell types · Skene &amp; Grant 2016</span>
-          <a class="chart-dl" href="data/ewce_scores.json" download aria-label="Download EWCE scores JSON">
+          <a class="chart-dl" href="data/ewce_scores.json" download aria-label="Download ewce_scores.json">
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5.5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             ewce_scores.json
           </a>
@@ -518,15 +520,15 @@
       </p>
     </div>
     <div class="footer-col">
-      <h4>Project</h4>
+      <h2 class="footer-heading">Project</h2>
       <ul>
-        <li><a href="index.html">Pitch</a></li>
+        <li><a href="/">Pitch</a></li>
         <li><a href="#panel-aims">Aims</a></li>
         <li><a href="#panel-methods">Methods</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Data</h4>
+      <h2 class="footer-heading">Data</h2>
       <ul>
         <li><a href="data/gwas_loci.json" download>gwas_loci.json</a></li>
         <li><a href="data/degs_table2.json" download>degs_table2.json</a></li>
@@ -535,7 +537,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Host</h4>
+      <h2 class="footer-heading">Host</h2>
       <ul>
         <li>UK Dementia Research Institute</li>
         <li>Imperial College London</li>
@@ -556,22 +558,22 @@
   </div>
   <div class="footer-foot">
     <span>&copy; 2026 <a href="https://mrinal.is-a.dev/" rel="author">Mrinal Joshi</a> · FLAIR-AD · Proposed PhD</span>
-    <span><a href="index.html">Back to pitch</a> · <a href="mailto:mrinal.joshi@ukdri.ac.uk">Email</a></span>
+    <span><a href="/">Back to pitch</a> · <a href="mailto:mrinal.joshi@ukdri.ac.uk">Email</a></span>
   </div>
 </footer>
 
-<script src="js/main.js" defer></script>
-<script src="js/tabs.js" defer></script>
-<script src="js/charts/util.js" defer></script>
-<script src="js/charts/manhattan.js" defer></script>
-<script src="js/charts/cell-types.js" defer></script>
-<script src="js/charts/ewce.js" defer></script>
-<script src="js/charts/volcano.js" defer></script>
-<script src="js/charts/qc.js" defer></script>
-<script src="js/charts/data-page.js" defer></script>
-<script src="js/figures/convergence.js" defer></script>
-<script src="js/figures/aims-gantt.js" defer></script>
-<script src="js/figures/pipeline.js" defer></script>
+<script src="js/main.js?v=22" defer></script>
+<script src="js/tabs.js?v=1" defer></script>
+<script src="js/charts/util.js?v=24" defer></script>
+<script src="js/charts/manhattan.js?v=22" defer></script>
+<script src="js/charts/cell-types.js?v=22" defer></script>
+<script src="js/charts/ewce.js?v=22" defer></script>
+<script src="js/charts/volcano.js?v=1" defer></script>
+<script src="js/charts/qc.js?v=1" defer></script>
+<script src="js/charts/data-page.js?v=1" defer></script>
+<script src="js/figures/convergence.js?v=23" defer></script>
+<script src="js/figures/aims-gantt.js?v=24" defer></script>
+<script src="js/figures/pipeline.js?v=1" defer></script>
 
 </body>
 </html>

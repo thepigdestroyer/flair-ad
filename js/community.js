@@ -1,12 +1,17 @@
 /* ============================================================
    FLAIR-AD · community.js
    Firebase Firestore — survey form + public forum
+
+   The survey and the forum are drawn straight away, but the Firebase SDK
+   (about 110 KB) is only fetched when the survey or forum is near the
+   viewport, or when someone starts typing in them. Visitors who never get
+   that far never download it.
    ============================================================ */
 
 (function () {
   'use strict';
 
-  /* ── Firebase init ── */
+  /* ── Firebase (loaded on demand) ── */
   const cfg = {
     apiKey:            'AIzaSyB8hw0iTrgyMVR3rweVsIQ2EjjongsbyDM',
     authDomain:        'aruk-phd-project-flair-ad.firebaseapp.com',
@@ -16,12 +21,64 @@
     appId:             '1:159637714726:web:6e76c18e2e220c604cf3e7',
   };
 
-  let db;
-  try {
-    if (!firebase.apps.length) firebase.initializeApp(cfg);
-    db = firebase.firestore();
-  } catch (e) {
-    console.warn('[FLAIR-AD] Firebase unavailable:', e);
+  const SDK = [
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js',
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js',
+  ];
+
+  let db = null;
+  let connecting = null;
+  const scripts = {};
+
+  function loadScript(src) {
+    if (!scripts[src]) {
+      scripts[src] = new Promise((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = src;
+        el.async = false; // run in the order added: app first, then firestore
+        el.onload = resolve;
+        el.onerror = () => { delete scripts[src]; el.remove(); reject(new Error('could not load ' + src)); };
+        document.head.appendChild(el);
+      });
+    }
+    return scripts[src];
+  }
+
+  // Resolves to the Firestore handle, or to null when the SDK cannot be loaded.
+  function connect() {
+    if (connecting) return connecting;
+    connecting = Promise.all(SDK.map(loadScript))
+      .then(() => {
+        if (!firebase.apps.length) firebase.initializeApp(cfg);
+        db = firebase.firestore();
+        startFeed();
+        return db;
+      })
+      .catch((e) => {
+        console.warn('[FLAIR-AD] Firebase unavailable:', e);
+        connecting = null; // let a later interaction try again
+        showFeedError();
+        return null;
+      });
+    return connecting;
+  }
+
+  function loadWhenNeeded() {
+    const zones = ['share', 'forum'].map((id) => document.getElementById(id)).filter(Boolean);
+    if (!zones.length) return;
+    const go = () => { connect(); };
+    zones.forEach((zone) => {
+      zone.addEventListener('focusin', go, { once: true });
+      zone.addEventListener('pointerdown', go, { once: true });
+    });
+    if (!('IntersectionObserver' in window)) {
+      window.addEventListener('load', go, { once: true });
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) { io.disconnect(); go(); }
+    }, { rootMargin: '600px 0px' });
+    zones.forEach((zone) => io.observe(zone));
   }
 
   const POSTS_COL    = 'forum_posts';
@@ -132,7 +189,7 @@
       rangeEl.addEventListener('input', () => { rangeVal.textContent = rangeEl.value; });
     }
 
-    if (!form || !db) return;
+    if (!form) return;
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -151,11 +208,13 @@
         q_recommend:       form.querySelector('#q_recommend')?.value || null,
         q_section:         radio('q_section'),
         final_comments:    (form.querySelector('#final-comments')?.value || '').trim(),
-        timestamp:         firebase.firestore.FieldValue.serverTimestamp(),
       };
 
       try {
-        await db.collection(FEEDBACK_COL).add(payload);
+        const database = await connect();
+        if (!database) throw new Error('Firebase unavailable');
+        payload.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        await database.collection(FEEDBACK_COL).add(payload);
         form.hidden   = true;
         thanks.hidden = false;
       } catch (err) {
@@ -236,10 +295,10 @@
   <div class="forum-post-foot">
     <button class="vote-btn vote-btn--up${voted ? ' voted' : ''}"
       data-id="${p.id}" data-dir="up"${voted ? ' disabled' : ''}
-      aria-label="Upvote">▲ <span>${p.upvotes || 0}</span></button>
+      aria-label="Upvote, ${p.upvotes || 0}"><span aria-hidden="true">▲</span> <span>${p.upvotes || 0}</span></button>
     <button class="vote-btn vote-btn--down${voted ? ' voted' : ''}"
       data-id="${p.id}" data-dir="down"${voted ? ' disabled' : ''}
-      aria-label="Downvote">▼ <span>${p.downvotes || 0}</span></button>
+      aria-label="Downvote, ${p.downvotes || 0}"><span aria-hidden="true">▼</span> <span>${p.downvotes || 0}</span></button>
     ${scoreHtml}
   </div>
 </article>`;
@@ -269,6 +328,11 @@
     } catch (err) { console.error('[FLAIR-AD] Vote error:', err); }
   }
 
+  function showFeedError() {
+    const feed = document.getElementById('forum-feed');
+    if (feed) feed.innerHTML = '<p class="forum-empty">Could not load posts — check your connection.</p>';
+  }
+
   function loadForum() {
     if (!db) return;
     if (unsubscribe) unsubscribe();
@@ -281,10 +345,14 @@
         },
         err => {
           console.error('[FLAIR-AD] Forum error:', err);
-          const feed = document.getElementById('forum-feed');
-          if (feed) feed.innerHTML = '<p class="forum-empty">Could not load posts — check your connection.</p>';
+          showFeedError();
         }
       );
+  }
+
+  // Starts the live feed once the SDK is ready (and the forum has been drawn).
+  function startFeed() {
+    if (document.getElementById('forum-feed') && !unsubscribe) loadForum();
   }
 
   function initForum() {
@@ -310,7 +378,7 @@
       });
     });
 
-    if (!submit || !db) return;
+    if (!submit) return;
 
     submit.addEventListener('click', async () => {
       const name    = (nameEl?.value.trim() || '') || 'Anonymous';
@@ -326,7 +394,9 @@
       submit.textContent = 'Posting…';
 
       try {
-        await db.collection(POSTS_COL).add({
+        const database = await connect();
+        if (!database) throw new Error('Firebase unavailable');
+        await database.collection(POSTS_COL).add({
           name:      name.slice(0, 40),
           comment:   comment.slice(0, 500),
           upvotes:   0,
@@ -346,11 +416,12 @@
       submit.disabled    = false;
     });
 
-    loadForum();
+    if (db) startFeed();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     initSurvey();
     initForum();
+    loadWhenNeeded();
   });
 })();

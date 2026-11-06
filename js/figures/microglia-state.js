@@ -108,7 +108,7 @@
     const focalDeep = P.focalDeep || '#8e0f45';
     const ink       = P.ink       || '#0a2540';
     const ink2      = P.ink2      || '#425466';
-    const ink3      = P.ink3      || '#6a7a8c';
+    const ink3      = P.ink3      || '#5f6f82';
     const paper2    = P.paper2    || '#f6f8fb';
     const gardener  = '#2f7d3f'; // sage green for gardener
     const alarm     = '#c87a1a'; // amber for alarm/activated

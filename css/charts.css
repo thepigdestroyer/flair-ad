@@ -186,14 +186,17 @@
 }
 .cetseq-step:hover { box-shadow: var(--sh-2); }
 .cetseq-step--fail {
-  opacity: 0.45;
   background: var(--c-paper-3);
   border-style: dashed;
 }
+/* Only the icon is faded: faded text drops below 4.5:1 contrast */
+.cetseq-step--fail .cetseq-icon { opacity: 0.45; }
+.cetseq-step--fail .cetseq-title { color: var(--c-ink-2); }
 .cetseq-step--output {
   border-color: var(--c-accent);
   background: var(--c-accent-wash, rgba(194,24,91,0.05));
 }
+.cetseq-step--output .cetseq-sub { color: var(--c-ink-2); }
 .cetseq-icon { line-height: 1; }
 .cetseq-title {
   display: block;
@@ -339,7 +342,6 @@
   border-radius: var(--r-2);
 }
 .chip-compare-col--fail {
-  opacity: 0.92;
   border-style: dashed;
   background: var(--c-paper-3);
 }

@@ -13,7 +13,7 @@
     const focalDeep = P.focalDeep || '#8e0f45';
     const ink       = P.ink       || '#0a2540';
     const ink2      = P.ink2      || '#425466';
-    const ink3      = P.ink3      || '#6a7a8c';
+    const ink3      = P.ink3      || '#5f6f82';
     const paper     = P.paper     || '#ffffff';
     const paper2    = P.paper2    || '#f6f8fb';
     const paper3    = P.paper3    || '#eef2f7';
@@ -125,7 +125,7 @@
       <div class="tipseq-wrap">
         <article class="tipseq-col tipseq-col--lab">
           <span class="tipseq-tag">In the lab already · TIP-seq</span>
-          <h4 class="tipseq-title">Read the genome where the antibody can grip.</h4>
+          <h3 class="tipseq-title">Read the genome where the antibody can grip.</h3>
           <p class="tipseq-body">
             The Skene Lab uses <strong>TIP-seq</strong> &mdash; a method that
             tethers a tiny molecular cutter (<span class="mono">Tn5</span>) to
@@ -150,7 +150,7 @@
 
         <article class="tipseq-col tipseq-col--phd">
           <span class="tipseq-tag tipseq-tag--phd">This PhD adds · CETCh-seq + Prime Editing</span>
-          <h4 class="tipseq-title">For proteins like IRF1 where antibodies aren't specific enough.</h4>
+          <h3 class="tipseq-title">For proteins like IRF1 where antibodies aren't specific enough.</h3>
           <p class="tipseq-body">
             We attach a tiny molecular barcode (<span class="mono">FLAG</span>)
             to a single IRF family member using <strong>Prime Editing</strong>

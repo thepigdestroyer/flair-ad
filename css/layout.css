@@ -190,10 +190,11 @@
   max-width: 36ch;
   margin: 0;
 }
-.footer-col h4 {
+.footer-col .footer-heading {
   font-family: var(--f-sans);
   font-size: var(--fs-0);
   font-weight: 600;
+  line-height: 1.1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--c-ink-3);

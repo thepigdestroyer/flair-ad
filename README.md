@@ -44,7 +44,7 @@ Crawl and sharing files at the root: `robots.txt`, `sitemap.xml`, the IndexNow k
 | Charts | D3.js (EWCE bar, Manhattan, volcano, QC gauges) |
 | Figures | Custom SVG (IIFEs injected on `DOMContentLoaded`) |
 | Animations | GSAP + ScrollTrigger |
-| Community | Firebase Firestore (forum + survey) |
+| Community | Firebase Firestore (forum + survey), loaded when the survey or forum is near the viewport |
 | Hosting | Netlify (manual deploys, see Deployment) |
 | Tests | Playwright |
 
@@ -67,7 +67,7 @@ Crawl and sharing files at the root: `robots.txt`, `sitemap.xml`, the IndexNow k
 │
 ├── js/
 │   ├── main.js                 Page bootstrap (counters, tabs, nav toggle)
-│   ├── community.js            Firebase forum integration
+│   ├── community.js            Survey and forum; loads the Firebase SDK on demand
 │   ├── scrollytelling.js       Scroll-driven section logic
 │   ├── tabs.js                 Tab component
 │   ├── counters.js             Animated stat counters
@@ -102,8 +102,14 @@ Crawl and sharing files at the root: `robots.txt`, `sitemap.xml`, the IndexNow k
 │   ├── degs_table2.json
 │   └── qc_stats.json
 │
-└── tests/                      Playwright visual tests
-    ├── site.spec.js
+├── _headers                    Netlify cache headers (static files cached for a day)
+├── netlify.toml                Netlify setting: Pretty URLs off, so data.html links stay as written
+│
+└── tests/                      Playwright tests
+    ├── site.spec.js            Layout, charts, links
+    ├── seo.spec.js             Head, canonical, structured data, crawl files
+    ├── round2.spec.js          Contrast, headings, accessible names, fonts, lazy scripts, headers (axe-core)
+    ├── serve.mjs               Static server that mimics Netlify (404 page, _headers)
     ├── playwright.config.js
     └── package.json
 ```
@@ -135,7 +141,7 @@ Right-click `index.html` → *Open with Live Server*
 
 ## Running tests
 
-`tests/serve.mjs` is a static server that mimics Netlify (unknown paths return `404.html` with status 404). `seo.spec.js` checks titles, descriptions, canonicals, Open Graph, JSON-LD, robots, sitemap, the IndexNow key and the 404.
+`tests/serve.mjs` is a static server that mimics Netlify (unknown paths return `404.html` with status 404, `_headers` rules are applied). `seo.spec.js` checks titles, descriptions, canonicals, Open Graph, JSON-LD, robots, sitemap, the IndexNow key and the 404. `round2.spec.js` runs axe-core (installed by `npm install`) for colour contrast, heading order and accessible names, and checks the non-blocking font CSS, that Plotly is absent and Firebase loads on demand, the crawlable `data.html` link and the cache headers.
 
 ```bash
 node tests/serve.mjs &        # http://127.0.0.1:8000
@@ -149,7 +155,11 @@ npm test
 
 ## Deployment
 
-The Netlify site (`flair-ad`, team "ARUK PhD Website") is **not** connected to this repo, so a push does not deploy. Deploy by hand: zip the site files, which are `index.html`, `data.html`, `404.html`, `robots.txt`, `sitemap.xml`, the IndexNow key `.txt`, `og.png`, `apple-touch-icon.png`, `favicon.ico`, `favicon.svg`, `css/`, `js/` and `data/` (for example `git archive --format=zip -o site.zip HEAD index.html data.html 404.html robots.txt sitemap.xml b3e3066c7789b0706e31f432ae6f20bf.txt og.png apple-touch-icon.png favicon.ico favicon.svg css js data`) and drop it on the project's Deploys page, or use `netlify deploy --prod`. There is no build step.
+The Netlify site (`flair-ad`, team "ARUK PhD Website") is **not** connected to this repo, so a push does not deploy. Deploy by hand: zip the site files, which are `index.html`, `data.html`, `404.html`, `robots.txt`, `sitemap.xml`, the IndexNow key `.txt`, `_headers`, `netlify.toml`, `og.png`, `apple-touch-icon.png`, `favicon.ico`, `favicon.svg`, `css/`, `js/` and `data/` (for example `git archive --format=zip -o site.zip HEAD index.html data.html 404.html robots.txt sitemap.xml b3e3066c7789b0706e31f432ae6f20bf.txt _headers netlify.toml og.png apple-touch-icon.png favicon.ico favicon.svg css js data`) and drop it on the project's Deploys page, or use `netlify deploy --prod`. There is no build step.
+
+**Caching.** `_headers` lets Netlify cache everything under `css/`, `js/` and `data/` (and the icons and social image) for a day, then revalidate; HTML always revalidates. So when a CSS or JS file changes, bump its `?v=` in every page that links it (a test checks that every local asset URL has a `?v=`).
+
+**Pretty URLs.** Netlify's Pretty URLs setting rewrites `data.html` links to `/data` in the served HTML, while the canonical URL and the sitemap use `/data.html`. `netlify.toml` switches the setting off, but Netlify may ignore it for manual deploys: after deploying, fetch the home page and check that its links still say `data.html` (the footer "Data explorer" link is absolute for that reason). If they say `/data`, untick Pretty URLs under Site configuration, Build & deploy, Post processing and deploy again.
 
 ---
 

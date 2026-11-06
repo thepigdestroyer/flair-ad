@@ -38,7 +38,7 @@
     const focal  = P.focal  || '#c2185b';
     const ink    = P.ink    || '#0a2540';
     const ink2   = P.ink2   || '#425466';
-    const ink3   = P.ink3   || '#6a7a8c';
+    const ink3   = P.ink3   || '#5f6f82';
     const paper2 = P.paper2 || '#f6f8fb';
     const paper3 = P.paper3 || '#eef2f7';
     const rule   = P.rule   || 'rgba(10,37,64,0.08)';

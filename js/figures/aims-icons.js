@@ -140,7 +140,7 @@
   function injectIcon(card, svgFn) {
     const P = window.FLAIR?.chartUtil?.PALETTE || {};
     const focal  = P.focal  || '#c2185b';
-    const ink3   = P.ink3   || '#6a7a8c';
+    const ink3   = P.ink3   || '#5f6f82';
     const paper3 = P.paper3 || '#eef2f7';
 
     const fig = document.createElement('figure');

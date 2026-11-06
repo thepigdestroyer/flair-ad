@@ -12,7 +12,7 @@
     const focalDeep = P.focalDeep || '#8e0f45';
     const ink       = P.ink       || '#0a2540';
     const ink2      = P.ink2      || '#425466';
-    const ink3      = P.ink3      || '#6a7a8c';
+    const ink3      = P.ink3      || '#5f6f82';
     const paper     = P.paper     || '#ffffff';
     const paper3    = P.paper3    || '#eef2f7';
     const faint     = P.faint     || '#cad5e1';
@@ -128,7 +128,7 @@
       <div class="chip-compare-wrap">
         <article class="chip-compare-col chip-compare-col--fail">
           <span class="chip-compare-label">Standard ChIP-seq · non-specific</span>
-          <h4 class="chip-compare-title">No antibody can tell IRF1 from its family.</h4>
+          <h3 class="chip-compare-title">No antibody can tell IRF1 from its family.</h3>
           <p class="chip-compare-body">
             ChIP-seq pulls a protein out of the cell using an antibody. For
             <span class="mono">IRF1</span>, every off-the-shelf antibody also
@@ -146,7 +146,7 @@
 
         <article class="chip-compare-col chip-compare-col--win">
           <span class="chip-compare-label">CETCh-seq · IRF1-only</span>
-          <h4 class="chip-compare-title">Tag only IRF1. Use a universal antibody.</h4>
+          <h3 class="chip-compare-title">Tag only IRF1. Use a universal antibody.</h3>
           <p class="chip-compare-body">
             We use prime editing to glue a tiny <span class="mono">FLAG</span>
             barcode onto the IRF1 gene &mdash; and only the IRF1 gene. An

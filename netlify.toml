@@ -1,0 +1,4 @@
+# The Netlify "Pretty URLs" setting rewrites links such as data.html to /data in the served HTML.
+# The canonical URL and the sitemap use /data.html, so the links are kept as written.
+[build.processing.html]
+  pretty_urls = false

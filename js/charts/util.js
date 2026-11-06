@@ -28,7 +28,7 @@
     opc:       cssVar('--c-chart-opc',         '#a85c6e'),
     ink:       cssVar('--c-ink',               '#0a2540'),
     ink2:      cssVar('--c-ink-2',             '#425466'),
-    ink3:      cssVar('--c-ink-3',             '#6a7a8c'),
+    ink3:      cssVar('--c-ink-3',             '#5f6f82'),
     paper:     cssVar('--c-paper',             '#ffffff'),
     paper2:    cssVar('--c-paper-2',           '#f6f8fb'),
     paper3:    cssVar('--c-paper-3',           '#eef2f7'),
